@@ -1,0 +1,123 @@
+@monospaceFont: Consolas,"Andale Mono","Lucida Console","DejaVu Sans Mono",Monaco,"Courier New",monospace;
+
+html, body {
+	height:100%;
+	background:#dcdcdc;	
+}
+
+#sidebar {
+	width:300px;
+	position: absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	background: black;
+	min-height:100%;
+	#logo {
+		height:180px;
+		background: #090909;
+		border-bottom:1px solid #404040;
+		a {
+			text-align: center;
+			display: block;
+			width:100%;
+			padding:25px 0;
+		}
+	}
+	ul {
+		padding-left: 0;
+		list-style-type: none;
+		li {
+			text-align: center;
+			a {
+				color:#b7b7b7;
+				font-size: 14px;
+				text-transform: uppercase;
+				text-decoration: none;
+				padding:42px 0;
+				display:block;
+				&:hover, &.active {
+					color:white;
+					text-decoration: none;
+					background: #090909;
+				}
+			}
+		}
+	}
+}
+
+#content {
+	padding:50px;
+	width:auto;
+	margin-left: 300px;
+	.event {
+		max-width:1200px;
+		.type {
+			font-size:10px;
+			text-transform: uppercase;
+			line-height: 1;
+			&.typeError {
+				color:#bf0404;
+			}
+			&.typeEvent {
+				color:#bf0404;
+			}			
+		}
+		.description {
+			background-color: #404238;
+			-moz-box-shadow: inset 0 0 5px #929292;
+			-webkit-box-shadow: inset 0 0 5px #929292;
+			box-shadow: inset 0 0 5px #929292;
+			padding:15px;
+			color: #fff;
+			font-family: @monospaceFont;
+			font-size: 14px;
+			text-shadow: 0 1px 0 #000;
+		}
+		.bottom {
+			margin-top:1px;
+			.button {
+				display:inline-block;
+				font-size: 18px;
+				font-weight: 700;
+				color:white;
+				background:#444;
+				padding:12px;
+				text-transform: uppercase;
+				opacity:0.9;
+				&:hover {
+					opacity:1;
+					text-decoration: none;
+				}
+				&.detail {
+					float:left;
+					background:#587ea0;
+				}
+				&.ignore {
+					float:right;
+					background: #d97e7e;
+				}
+				&.solved {
+					float:right;
+					background: #52948f;
+				}
+
+			}
+			.metainfo {
+				float:left;
+				display:inline-block;
+				padding:12px 10px 0 20px;
+				font-size:10px;
+				color:#555555;
+				a {
+					font-weight: 700;
+					text-decoration: underline;					
+					color:#555555;
+				}
+				&:hover, &:hover a {
+					color:#000;
+				}
+			}
+		}
+	}
+}

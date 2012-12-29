@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+
+.icon-star:before { content: '\2605'; } /* '★' */
+.icon-heart:before { content: '\2665'; } /* '♥' */
+.icon-attention:before { content: '\26a0'; } /* '⚠' */
+.icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-ok:before { content: '\2713'; } /* '✓' */
+.icon-cancel:before { content: '\2715'; } /* '✕' */
+.icon-eye-1:before { content: '\e800'; } /* '' */
+.icon-eye-off:before { content: '\e70b'; } /* '' */
+.icon-chat:before { content: '\e720'; } /* '' */
+.icon-down-open:before { content: '\e75c'; } /* '' */
+.icon-left-open:before { content: '\e75d'; } /* '' */
+.icon-right-open:before { content: '\e75e'; } /* '' */
+.icon-up-open:before { content: '\e75f'; } /* '' */
+.icon-chart:before { content: '📈'; } /* '\1f4c8' */
+.icon-search:before { content: '🔍'; } /* '\1f50d' */
+.icon-wrench:before { content: '🔧'; } /* '\1f527' */
