@@ -1,14 +1,17 @@
 <div id="content">
 	<?php
-		$results = DB::query("SELECT type, state, datetime, text, file, line, COUNT(*) as count FROM events GROUP BY text ORDER BY count DESC;");
-		foreach ($results as $row) {
+		$type = DB::query("SELECT type, typename FROM types;");
+
+		$results = DB::query("SELECT type, state, time, text, file, line, COUNT(*) as count, MAX(time) AS lastoccurence FROM events GROUP BY text ORDER BY count DESC;");
+
+		foreach ($results as $event) {
 	?>
 	<div class="event">
-	    <div class="type typeError">
-	        Javascript Error
+	    <div class="type <?php if($event['type'] == 0 or $event['type'] == 1) {echo "typeError";} ?>">
+	        <?php echo $type[$event['type']]['typename']; ?>
 	    </div>
 	    <div class="description">
-	        <?php echo $row['text'] ?>	        
+	        <?php echo $event['text'] ?>	        
 	    </div>
 	    <div class="bottom">
 	        <div class="pull-left">
@@ -16,7 +19,7 @@
 		            <?php echo _('Details'); ?>
 		        </a>
 		        <div class="metainfo">
-		            <?php echo _('In'); ?> <a href="#"><?php echo $row['file'] ?> : <?php echo $row['line'] ?></a> | <?php echo _('Last occurence'); ?>: <strong><?php echo $row['datetime'] ?></strong>
+		            <?php echo _('In'); ?> <a href="#"><?php echo $event['file'] ?> : <?php echo $event['line'] ?></a> | <?php echo _('Last occurence'); ?>: <strong><?php echo FormatTime($event['lastoccurence']) ?></strong>
 		        </div>
 		    </div>
 	    	<div class="pull-right">
@@ -26,8 +29,10 @@
 		        <a href="#" class="button solved">
 		            <?php echo _('Solved'); ?>
 		        </a>                
-	        </div>        
+	        </div>  
+	        <div class="clearfix"></div>      
 	    </div>
+	    <div class="clearfix"></div>
 	</div>
 	<?php
 		}
