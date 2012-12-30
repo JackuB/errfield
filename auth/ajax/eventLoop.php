@@ -1,5 +1,5 @@
 <?php
-	require_once '../../config.php';
+	require_once '../../config.php'; 
 ?>
 	<?php
 		$type = DB::query("SELECT type, typename FROM types;");
