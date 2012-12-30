@@ -6,15 +6,17 @@
         var xmlhttp;
         if (window.XMLHttpRequest) {
             xmlhttp=new XMLHttpRequest();
+            secondxmlhttp=new XMLHttpRequest();
         } else {
             xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        } 
+            secondxmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }          
         var userIP = "<?php echo $_SERVER['REMOTE_ADDR']?>";
         var userDetail = "&ip="+userIP+"&url="+document.URL+"&ua="+navigator.userAgent+"&resolution="+screen.width+'x'+screen.height;
         window.onerror = function (msg, url, line) {
             window.onerror = function() {};
             var elapsed = new Date().getTime()-renderStart;
-            var params = "type=0&text="+msg+"&line="+line+"&url="+url+"&elapsedtime="+elapsed+userDetail;
+            var params = "type=0&text="+msg+"&line="+line+"&file="+url+"&elapsedtime="+elapsed+userDetail;
             xmlhttp.open("POST","/errfield/gate.php",true);
             xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
             xmlhttp.send(params);
@@ -24,9 +26,9 @@
         window.onload=function() { 
             var elapsed = new Date().getTime()-renderStart;
             var params = "type=time&elapsedtime="+elapsed+userDetail;
-            xmlhttp.open("POST","/errfield/gate.php",true);
-            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
-            //xmlhttp.send(params);   
+            secondxmlhttp.open("POST","/errfield/gate-perf.php",true);
+            secondxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
+            secondxmlhttp.send(params);   
         }  
 </script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">

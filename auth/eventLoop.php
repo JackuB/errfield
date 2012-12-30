@@ -18,7 +18,7 @@
 		        <a href="#" class="button detail">
 		            <?php echo _('Details'); ?>
 		        </a>
-		        <div class="metainfo">
+		        <div class="metainfo hidden-phone">
 		            <?php echo _('In'); ?> <a href="#"><?php echo $event['file'] ?> : <?php echo $event['line'] ?></a> | <?php echo _('Last occurence'); ?>: <strong><?php echo FormatTime($event['lastoccurence']) ?></strong>
 		        </div>
 		    </div>
