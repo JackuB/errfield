@@ -45,6 +45,8 @@
     </head>
     <body>
         <h1>Hello World</h1>
+        <?php $browser = get_browser(null, true);
+print_r($browser);echo $_SERVER['HTTP_USER_AGENT'] . "\n\n"; ?>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
 

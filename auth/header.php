@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="auth/css/style.css">
+    <script type="text/javascript" src="auth/js/head.load.min.js"></script>
 </head>
 <body>
     <div id="sidebar" class="hidden-phone">
@@ -17,7 +18,7 @@
         </div>
         <ul>
             <li><a class="active" href="#errors"><?php echo _('Errors'); ?></a></li>
-            <li><a href="#events"><?php echo _('Events'); ?></a></li>
+            <!--<li><a href="#events"><?php echo _('Events'); ?></a></li>-->
             <li><a href="#reports"><?php echo _('Reports'); ?></a></li>
             <li><a href="#settings"><?php echo _('Settings'); ?></a></li>
         </ul>

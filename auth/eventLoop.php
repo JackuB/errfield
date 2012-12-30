@@ -2,11 +2,11 @@
 	<?php
 		$type = DB::query("SELECT type, typename FROM types;");
 
-		$results = DB::query("SELECT type, state, time, text, file, line, COUNT(*) as count, MAX(time) AS lastoccurence FROM events GROUP BY text ORDER BY count DESC;");
+		$results = DB::query("SELECT id, type, state, time, text, file, line, COUNT(*) as count, MAX(time) AS lastoccurence FROM events GROUP BY text ORDER BY count DESC;");
 
 		foreach ($results as $event) {
 	?>
-	<div class="event">
+	<div class="event" data-attr="<?php echo $event['id'] ?>">
 	    <div class="type <?php if($event['type'] == 0 or $event['type'] == 1) {echo "typeError";} ?>">
 	        <?php echo $type[$event['type']]['typename']; ?>
 	    </div>
