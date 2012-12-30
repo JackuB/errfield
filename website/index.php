@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <script>
+        var userIP = "<?php echo $_SERVER['REMOTE_ADDR']?>";        
         var xmlhttp;
         if (window.XMLHttpRequest) {
             xmlhttp=new XMLHttpRequest();
@@ -11,7 +12,6 @@
             xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
             secondxmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }          
-        var userIP = "<?php echo $_SERVER['REMOTE_ADDR']?>";
         var userDetail = "&ip="+userIP+"&url="+document.URL+"&ua="+navigator.userAgent+"&resolution="+screen.width+'x'+screen.height;
         window.onerror = function (msg, url, line) {
             window.onerror = function() {};
@@ -26,7 +26,7 @@
         window.onload=function() { 
             var elapsed = new Date().getTime()-renderStart;
             var params = "type=time&elapsedtime="+elapsed+userDetail;
-            secondxmlhttp.open("POST","/errfield/gate-perf.php",true);
+            secondxmlhttp.open("POST","/errfield/gate.php",true);
             secondxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
             secondxmlhttp.send(params);   
         }  
@@ -51,6 +51,9 @@
         <script src="js/vendor/bootstrap.min.js"></script>
 
         <script src="js/main.js"></script>
-        <script type="text/javascript">$this is aper('¨);</script>
+
+
+
+        <script type="text/javascript">$txhis is aper('¨);</script>
     </body>
 </html>

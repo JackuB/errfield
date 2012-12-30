@@ -1,7 +1,7 @@
 <?php
 	require_once 'config.php';
 
-	if($_POST["type"] === "time") {
+	if($_POST["type"] == "time") {
 		DB::insert('performance', array(
 			'time' => time(),
 		  	'elapsedtime' => htmlspecialchars($_POST["elapsedtime"]),
@@ -10,11 +10,18 @@
 		  	'ip' => htmlspecialchars($_POST["ip"])
 		));
 		echo "OK!";
-	} elseif($_POST["type"] == "0") {
+	} elseif($_POST["type"] != "") {
+		$text = htmlspecialchars($_POST["text"]);
+		$results = DB::query("SELECT * FROM events WHERE text='$text' AND state='ignored';");
+		if(!empty($results)) {
+			$newState = "ignored";
+		} else {
+			$newState = "unresolved";
+		}
 		DB::insert('events', array(
 			'type' => htmlspecialchars($_POST["type"]),
-			'state' => "unresolved",
-			'text' => htmlspecialchars($_POST["text"]),
+			'state' => $newState,
+			'text' => $text,
 			'time' => time(),
 			'file' => htmlspecialchars($_POST["file"]),
 			'line' => htmlspecialchars($_POST["line"]),
@@ -25,6 +32,7 @@
 		  	'ip' => htmlspecialchars($_POST["ip"])
 		));
 		echo "OK! inserted to events";
+		echo $newState;
 	} else {
 		die('No error was POSTed');
 	}
