@@ -1,7 +1,7 @@
 <?php
 	require_once 'config.php';
 
-	if(isset($_POST["type"])) {
+	if(isset($_POST["type"]) == "time") {
 		DB::insert('events', array(
 		  'type' => htmlspecialchars($_POST["type"]),
 		  'data' => htmlspecialchars($_POST["data"]),
@@ -16,4 +16,9 @@
 		die('No error was POSTed');
 	}
 
+
+
 ?>
+
+
+OK!

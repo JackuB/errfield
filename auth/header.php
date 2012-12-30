@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html class="no-js">
 <head>
+    <script type="text/javascript">
+        var renderStart = new Date().getTime();
+        window.onload=function() { 
+           var elapsed = new Date().getTime()-renderStart;
+        } 
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>errfield - web error reporting and performance analysis</title>
