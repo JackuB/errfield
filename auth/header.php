@@ -17,9 +17,10 @@
             </a>
         </div>
         <ul>
-            <li><a class="active" href="#errors"><?php echo _('Errors'); ?></a></li>
-            <!--<li><a href="#events"><?php echo _('Events'); ?></a></li>-->
-            <li><a href="#reports"><?php echo _('Reports'); ?></a></li>
-            <li><a href="#settings"><?php echo _('Settings'); ?></a></li>
+            <li><a href="#errors"><i class="icon-attention"></i> <?php echo _('Errors'); ?></a></li>
+            <li><a href="#reports"><i class="icon-chart"></i> <?php echo _('Reports'); ?></a></li>
+            <li><a href="#settings"><i class="icon-wrench"></i> <?php echo _('Settings'); ?></a></li>
         </ul>
     </div>
+
+    <div id="content">

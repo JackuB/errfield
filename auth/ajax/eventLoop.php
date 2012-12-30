@@ -1,4 +1,6 @@
-<div id="content">
+<?php
+	require_once '../../config.php';
+?>
 	<?php
 		$type = DB::query("SELECT type, typename FROM types;");
 
@@ -6,20 +8,20 @@
 
 		foreach ($results as $event) {
 	?>
-	<div class="event" data-attr="<?php echo $event['id'] ?>">
+	<div class="event">
 	    <div class="type <?php if($event['type'] == 0 or $event['type'] == 1) {echo "typeError";} ?>">
 	        <?php echo $type[$event['type']]['typename']; ?>
 	    </div>
-	    <div class="description">
+	    <div class="description" data-attr="<?php echo $event['id'] ?>">
 	        <?php echo $event['text'] ?>	        
 	    </div>
 	    <div class="bottom">
 	        <div class="pull-left">
-		        <a href="#" class="button detail">
+		        <a href="#" class="button detail" data-attr="<?php echo $event['id'] ?>">
 		            <?php echo _('Details'); ?>
 		        </a>
 		        <div class="metainfo hidden-phone">
-		            <?php echo _('In'); ?> <a href="#"><?php echo $event['file'] ?> : <?php echo $event['line'] ?></a> | <?php echo _('Last occurence'); ?>: <strong><?php echo FormatTime($event['lastoccurence']) ?></strong>
+		            <?php echo _('In'); ?> <a href="#" data-attr="<?php echo $event['id'] ?>"><?php echo $event['file'] ?> : <?php echo $event['line'] ?></a> | <?php echo _('Last occurence'); ?>: <strong><?php echo FormatTime($event['lastoccurence']) ?></strong>
 		        </div>
 		    </div>
 	    	<div class="pull-right">
@@ -37,4 +39,3 @@
 	<?php
 		}
 	?>
-</div>
