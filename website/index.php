@@ -74,8 +74,6 @@
         <h1>Hello World</h1>
 
         <img src="http://www.echenique.com/wp-content/uploads/2009/12/articles040010010_DSC3862.jpg" />
-        <?php $browser = get_browser(null, true);
-print_r($browser);echo $_SERVER['HTTP_USER_AGENT'] . "\n\n"; ?>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
 
@@ -85,6 +83,17 @@ print_r($browser);echo $_SERVER['HTTP_USER_AGENT'] . "\n\n"; ?>
 
 
 
-        <!--<script type="text/javascript">$txhis is aper('¨);</script>-->
+        <!--<script type="text/javascript">
+
+           window.onload=function() {
+                if (typeof performance != 'undefined') {
+                    setTimeout(function(){
+                        alert(perfif)
+                    }, 2000);
+                }
+            }         
+
+
+    </script>-->
     </body>
 </html>
