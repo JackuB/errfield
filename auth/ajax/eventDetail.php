@@ -39,23 +39,23 @@
 		if(!empty($occurences)) echo "<h2>Other occurences</h2>";
 		foreach ($occurences as $occurence) {
 	?>
-	<div class="event">
-	    <div class="type <?php if($occurence['type'] == 0 or $occurence['type'] == 1) echo "typeError"; ?>">
-	        <?php echo $type[$occurence['type']]['typename']; ?>
-	    </div>
-	    <div class="description" data-attr="<?php echo $occurence['id'] ?>">
-	        <?php echo $occurence['text'] ?>	        
-	    </div>
-	    <div class="bottom">
-	        <div class="pull-left">
-		        <div class="metainfo">
-		            <?php echo _('In'); ?> <a href="#" data-attr="<?php echo $occurence['id'] ?>"><?php echo $occurence['file'] ?> : <?php echo $occurence['line'] ?></a> | <?php echo _('Occured'); ?>: <strong><?php echo FormatTime($occurence['time']) ?></strong>
-		        </div>
-		    </div> 
-	        <div class="clearfix"></div>      
-	    </div>
-	    <div class="clearfix"></div>
-	</div>
+		<div class="event">
+		    <div class="type <?php if($occurence['type'] == 0 or $occurence['type'] == 1) echo "typeError"; ?>">
+		        <?php echo $type[$occurence['type']]['typename']; ?>
+		    </div>
+		    <div class="description" data-attr="<?php echo $occurence['id'] ?>">
+		        <?php echo $occurence['text'] ?>	        
+		    </div>
+		    <div class="bottom">
+		        <div class="pull-left">
+			        <div class="metainfo">
+			            <?php echo _('In'); ?> <a href="#" data-attr="<?php echo $occurence['id'] ?>"><?php echo $occurence['file'] ?> : <?php echo $occurence['line'] ?></a> | <?php echo _('Occured'); ?>: <strong><?php echo FormatTime($occurence['time']) ?></strong>
+			        </div>
+			    </div> 
+		        <div class="clearfix"></div>      
+		    </div>
+		    <div class="clearfix"></div>
+		</div>
 	<?php
 		}
 	?>	

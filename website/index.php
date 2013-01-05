@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <script>
             var userIP = "<?php echo $_SERVER['REMOTE_ADDR']?>";
-            var renderStart = new Date().getTime();
             var xmlhttp;
+            var renderStart = new Date().getTime();
             if (window.XMLHttpRequest) {
                 xmlhttp=new XMLHttpRequest();
                 secondxmlhttp=new XMLHttpRequest();
@@ -13,7 +13,7 @@
                 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                 secondxmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
             }          
-            var userDetail = "&ip="+userIP+"&url="+document.URL+"&ua="+navigator.userAgent+"&resolution="+screen.width+'x'+screen.height;
+            var userDetail = "&ip="+userIP+"&url="+document.URL+"&resolution="+screen.width+'x'+screen.height;
             window.onerror = function (msg, url, line) {
                 window.onerror = function() {};
                 var elapsed = new Date().getTime()-renderStart;
@@ -24,12 +24,39 @@
                 return false;
             } 
             window.onload=function() {
-                var elapsed = new Date().getTime()-renderStart;
-                var params = "type=time&elapsedtime="+elapsed+userDetail;
-                secondxmlhttp.open("POST","/errfield/gate.php",true);
-                secondxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
-                secondxmlhttp.send(params);
-            }  
+                if (typeof performance != 'undefined') {
+                    setTimeout(function(){
+                        if(performance.navigation.type == 0) {
+                            var perfRedir = performance.navigation.redirectCount;
+
+                            var perfStart = performance.timing.navigationStart;
+                            var perfReqStart = performance.timing.requestStart;
+                            var perfResStart = performance.timing.responseStart;
+                            var perfResEnd = performance.timing.responseEnd;
+                            var perfDomLoading = performance.timing.domLoading;
+                            var perfDomInter = performance.timing.domInteractive;
+                            var perfLoadStart = performance.timing.loadEventStart;
+                            var perfLoadEnd = performance.timing.loadEventEnd;
+
+                            var redirectTime = perfReqStart - perfStart;
+                            var requestTime = perfResStart - perfReqStart;
+                            var responseTime = perfResEnd - perfResStart;
+                            var domProcessingTime = perfDomInter - perfDomLoading;
+                            var domLoadingTime = perfLoadStart - perfDomInter;
+                            if(perfLoadEnd > 0) {
+                                var loadEventTime = perfLoadEnd - perfLoadStart;
+                            } else {
+                                var loadEventTime = 0;
+                            }
+
+                            var params = "type=time&redirectCount="+perfRedir+"&redirectTime="+redirectTime+"&requestTime="+requestTime+"&responseTime="+responseTime+"&domProcessingTime="+domProcessingTime+"&domLoadingTime="+domLoadingTime+"&loadEventTime="+loadEventTime+userDetail;
+                            secondxmlhttp.open("POST","/errfield/gate.php",true);
+                            secondxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
+                            secondxmlhttp.send(params);                       
+                        }
+                    }, 20);
+                }
+            }         
         </script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
@@ -58,6 +85,6 @@ print_r($browser);echo $_SERVER['HTTP_USER_AGENT'] . "\n\n"; ?>
 
 
 
-        <script type="text/javascript">$txhis is aper('¨);</script>
+        <!--<script type="text/javascript">$txhis is aper('¨);</script>-->
     </body>
 </html>

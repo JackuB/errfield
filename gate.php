@@ -38,8 +38,6 @@
 	}
 
 
-$browser = get_browser(null, true);
+$browser = get_browser();
 print_r($browser);
 ?>
-
-
