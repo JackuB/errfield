@@ -1,5 +1,10 @@
 <?php
 	require_once '../../config.php'; 
+
+/*echo '<pre>';
+$test = DB::query("SELECT domLoadingTime, time, MONTHNAME(from_unixtime(time)) AS month FROM performance;");
+print_r($test);
+echo '</pre>';*/
 ?>
 
 <?php

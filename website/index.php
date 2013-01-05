@@ -56,7 +56,7 @@
                         }
                     }, 20);
                 }
-            }         
+            }
         </script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
@@ -83,7 +83,7 @@
 
 
 
-        <!--<script type="text/javascript">
+        <script type="text/javascript">
 
            window.onload=function() {
                 if (typeof performance != 'undefined') {
