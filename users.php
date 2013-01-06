@@ -3,7 +3,8 @@ session_start();
 $userTest = DB::query("SELECT id FROM users;");
 
 if(empty($userTest)) {
-	if(empty($_POST['password'])) { 
+	if(empty($_POST['password'])) {
+		include 'loginHeader.php';
 		?>
 			<h1>Create new user</h1>
 			<form method="post">
@@ -13,6 +14,7 @@ if(empty($userTest)) {
 				<input type="submit">
 			</form>
 		<?php
+		include 'loginFooter.php';
 		die();
 	} else {
 		$hash_for_user = Bcrypt::hash($_POST['password']);
@@ -41,6 +43,7 @@ if(empty($userTest)) {
 		}
 	} else {
 		if(empty($_POST['password']) and empty($_POST['login'])) {
+			include 'loginHeader.php';
 			?>
 					<h1>Login</h1>
 					<form method="post">
@@ -49,6 +52,7 @@ if(empty($userTest)) {
 						<input type="submit">
 					</form>
 			<?php
+			include 'loginFooter.php';
 			die();
 		} else {
 			$postLogin = $_POST['login'];

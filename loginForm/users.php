@@ -3,16 +3,18 @@ session_start();
 $userTest = DB::query("SELECT id FROM users;");
 
 if(empty($userTest)) {
-	if(empty($_POST['password'])) { 
+	if(empty($_POST['password'])) {
+		include 'loginHeader.php';
 		?>
 			<h1>Create new user</h1>
 			<form method="post">
-				Login: <input type="login" name="login">
-				Email: <input type="email" name="email">
-				Password: <input type="password" name="password">
-				<input type="submit">
+				<label for="login">Username: <input type="login" name="login" autofocus></label>
+				<label for="email">Email: <input type="email" name="email"></label>
+				<label for="password">Password: <input type="password" name="password"></label>
+				<input type="submit" value="Create new user and login">
 			</form>
 		<?php
+		include 'loginFooter.php';
 		die();
 	} else {
 		$hash_for_user = Bcrypt::hash($_POST['password']);
@@ -21,13 +23,15 @@ if(empty($userTest)) {
 			'email' => htmlspecialchars($_POST["email"]),
 			'passwordHash' => htmlspecialchars($hash_for_user)
 		));
+		$_SESSION['errfieldHash']=$hash_for_user;
+		$_SESSION['errfieldUserID']=0;		
 	}
 
 } else {
 
 /*
 *
-* TODO: some kind of temporary hash key to be used in $_SESSION?
+* TODO: temporary hash key to be used in $_SESSION?
 *
 */
 
@@ -39,14 +43,15 @@ if(empty($userTest)) {
 		}
 	} else {
 		if(empty($_POST['password']) and empty($_POST['login'])) {
+			include 'loginHeader.php';
 			?>
-					<h1>Login</h1>
 					<form method="post">
-						Login (username or email): <input type="login" name="login">
-						Password: <input type="password" name="password">
-						<input type="submit">
+						<label for="login">Username: <input type="login" placeholder="Username or email" name="login" autofocus></label>
+						<label for="password">Password: <input type="password" name="password"></label>
+						<input type="submit" value="Login">
 					</form>
 			<?php
+			include 'loginFooter.php';
 			die();
 		} else {
 			$postLogin = $_POST['login'];
