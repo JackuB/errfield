@@ -1,13 +1,6 @@
 <?php
 	require_once '../../config.php'; 
 
-/*echo '<pre>';
-$test = DB::query("SELECT domLoadingTime, time, MONTHNAME(from_unixtime(time)) AS month FROM performance;");
-print_r($test);
-echo '</pre>';*/
-?>
-
-<?php
 	$type = DB::query("SELECT type, typename FROM types;");
 
 	$results = DB::query("SELECT id, type, state, time, text, file, line, COUNT(*) as count, MAX(time) AS lastoccurence FROM events GROUP BY text ORDER BY count DESC;");

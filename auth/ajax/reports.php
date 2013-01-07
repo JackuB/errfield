@@ -1,103 +1,61 @@
+<?php
+    require_once '../../config.php'; 
+?>
 <h1>Application performance report</h1>
 
 <div id="chartdiv" style="width: 100%; height: 362px;"></div>
 
 <script type='text/javascript'>
-var chartData = [{
-    year: 2000,
-    cars: 1587,
-    motorcycles: 650,
-    bicycles: 121},
-{
-    year: 1995,
-    cars: 1567,
-    motorcycles: 683,
-    bicycles: 146},
-{
-    year: 1996,
-    cars: 1617,
-    motorcycles: 691,
-    bicycles: 138},
-{
-    year: 1997,
-    cars: 1630,
-    motorcycles: 642,
-    bicycles: 127},
-{
-    year: 1998,
-    cars: 1660,
-    motorcycles: 699,
-    bicycles: 105},
-{
-    year: 1999,
-    cars: 1683,
-    motorcycles: 721,
-    bicycles: 109},
-{
-    year: 2000,
-    cars: 1691,
-    motorcycles: 737,
-    bicycles: 112},
-{
-    year: 2001,
-    cars: 1298,
-    motorcycles: 680,
-    bicycles: 101},
-{
-    year: 2002,
-    cars: 1275,
-    motorcycles: 664,
-    bicycles: 97},
-{
-    year: 2003,
-    cars: 1246,
-    motorcycles: 648,
-    bicycles: 93},
-{
-    year: 2004,
-    cars: 1218,
-    motorcycles: 637,
-    bicycles: 101},
-{
-    year: 2005,
-    cars: 1213,
-    motorcycles: 633,
-    bicycles: 87},
-{
-    year: 2006,
-    cars: 1199,
-    motorcycles: 621,
-    bicycles: 79},
-{
-    year: 2007,
-    cars: 1110,
-    motorcycles: 210,
-    bicycles: 81},
-{
-    year: 2008,
-    cars: 1165,
-    motorcycles: 232,
-    bicycles: 75},
-{
-    year: 2009,
-    cars: 1145,
-    motorcycles: 219,
-    bicycles: 88},
-{
-    year: 2010,
-    cars: 1163,
-    motorcycles: 201,
-    bicycles: 82},
-{
-    year: 2011,
-    cars: 1180,
-    motorcycles: 285,
-    bicycles: 87},
-{
-    year: 2012,
-    cars: 1159,
-    motorcycles: 277,
-    bicycles: 71}];
+var chartData = [<?php
+$chart = DB::query("SELECT time, redirectTime, requestTime, responseTime, domProcessingTime, domLoadingTime, loadEventTime, from_unixtime(time,'%Y-%m-%d') FROM performance ORDER BY from_unixtime(time,'%Y-%m-%d') DESC;");
+$groups = array();
+foreach ($chart as $item) {
+    $key = $item["from_unixtime(time,'%Y-%m-%d')"];
+    if (!isset($groups[$key])) {
+        $groups[$key] = array(
+            'items' => array($item),
+            'count' => 1,
+        );
+    } else {
+        $groups[$key]['items'][] = $item;
+        $groups[$key]['count'] += 1;
+    }
+}
+
+foreach($groups as $date) {
+    if($date["count"] > 1) {
+        $count = round($date["count"]/2);
+    } else {
+        $count = 0;
+    }
+
+    echo "{";
+    echo "datetime: \"" . gmdate("Y-m-d", $date["items"][$count]["time"]) . "\",";
+
+    aasort($date["items"],"redirectTime");
+    echo "redirectTime: " . $date["items"][$count]["redirectTime"] . ",";
+
+    aasort($date["items"],"requestTime");
+    echo "requestTime: " . $date["items"][$count]["requestTime"] . ",";
+
+    aasort($date["items"],"responseTime");
+    echo "responseTime: " . $date["items"][$count]["responseTime"] . ",";
+
+    aasort($date["items"],"domProcessingTime");
+    echo "domProcessingTime: " . $date["items"][$count]["domProcessingTime"] . ",";
+
+    aasort($date["items"],"domLoadingTime");
+    echo "domLoadingTime: " . $date["items"][$count]["domLoadingTime"] . ",";
+
+    aasort($date["items"],"loadEventTime");
+    echo "loadEventTime: " . $date["items"][$count]["loadEventTime"];
+
+    echo "},";
+}
+unset($date);
+?>
+
+];
 
 
     // SERIAL CHART
@@ -112,7 +70,7 @@ var chartData = [{
     chart.marginTop = 10;
     chart.autoMarginOffset = 3;
     chart.marginRight = 0;        
-    chart.categoryField = "year";
+    chart.categoryField = "datetime";
 
     // AXES
     // Category
@@ -126,61 +84,58 @@ var chartData = [{
     var valueAxis = new AmCharts.ValueAxis();
     valueAxis.stackType = "regular"; // this line makes the chart "stacked"
     valueAxis.gridAlpha = 0.07;
-    valueAxis.title = "Traffic incidents";
+    valueAxis.title = "Time in ms";
     chart.addValueAxis(valueAxis);
 
-    // GUIDES are vertical (can also be horizontal) lines (or areas) marking some event.
-    // first guide
-    var guide1 = new AmCharts.Guide();
-    guide1.category = "2001";
-    guide1.lineColor = "#CC0000";
-    guide1.lineAlpha = 1;
-    guide1.dashLength = 2;
-    guide1.inside = true;
-    guide1.labelRotation = 90;
-    guide1.label = "fines for speeding increased";
-    categoryAxis.addGuide(guide1);
-
-    // second guide
-    var guide2 = new AmCharts.Guide();
-    guide2.category = "2007";
-    guide2.lineColor = "#CC0000";
-    guide2.lineAlpha = 1;
-    guide2.dashLength = 2;
-    guide2.inside = true;
-    guide2.labelRotation = 90;
-    guide2.label = "motorcycle maintenance fee introduced";
-    categoryAxis.addGuide(guide2);
-
-
     // GRAPHS
-    // first graph
     var graph = new AmCharts.AmGraph();
     graph.type = "line";
-    graph.hidden = true;
-    graph.title = "Cars";
-    graph.valueField = "cars";
+    graph.hidden = false;
+    graph.title = "redirectTime";
+    graph.valueField = "redirectTime";
     graph.lineAlpha = 1;
     graph.fillAlphas = 0.6; // setting fillAlphas to > 0 value makes it area graph
     chart.addGraph(graph);
 
-    // second graph
     graph = new AmCharts.AmGraph();
     graph.type = "line";
-    graph.title = "Motorcycles";
-    graph.valueField = "motorcycles";
+    graph.title = "requestTime";
+    graph.valueField = "requestTime";
     graph.lineAlpha = 1;
     graph.fillAlphas = 0.6;
     chart.addGraph(graph);
 
-    // third graph
     graph = new AmCharts.AmGraph();
     graph.type = "line";
-    graph.title = "Bicycles";
-    graph.valueField = "bicycles";
+    graph.title = "responseTime";
+    graph.valueField = "responseTime";
     graph.lineAlpha = 1;
     graph.fillAlphas = 0.6;
     chart.addGraph(graph);
+
+    graph = new AmCharts.AmGraph();
+    graph.type = "line";
+    graph.title = "domProcessingTime";
+    graph.valueField = "domProcessingTime";
+    graph.lineAlpha = 1;
+    graph.fillAlphas = 0.6;
+    chart.addGraph(graph); 
+
+    graph = new AmCharts.AmGraph();
+    graph.type = "line";
+    graph.title = "domLoadingTime";
+    graph.valueField = "domLoadingTime";
+    graph.lineAlpha = 1;
+    graph.fillAlphas = 0.6;
+    chart.addGraph(graph);    
+
+    graph = new AmCharts.AmGraph();
+    graph.type = "line";
+    graph.title = "loadEventTime";
+    graph.valueField = "loadEventTime";
+    graph.lineAlpha = 1;
+    graph.fillAlphas = 0.6;
+    chart.addGraph(graph);     
 
     // LEGEND
     var legend = new AmCharts.AmLegend();
@@ -196,6 +151,4 @@ var chartData = [{
     // WRITE
     chart.write("chartdiv");
     chart.invalidateSize();
-
-
 </script>

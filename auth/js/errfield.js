@@ -10,7 +10,7 @@ $(document).on("click", ".description, .button.detail, .metainfo a", function(e)
 	});	
 });
 
-function loadErrors() {		
+function loadErrors() {
 	IDcontent.stop().fadeOut(50);
 	IDcontent.html('');	
 	$.post('auth/ajax/eventLoop.php', function(data) {
@@ -20,7 +20,7 @@ function loadErrors() {
 	});			
 }
 
-function loadReports() {	
+function loadReports() {
 	IDcontent.stop().fadeOut(50);
 	IDcontent.html('');
 	$.post('auth/ajax/reports.php', function(data) {
@@ -30,7 +30,7 @@ function loadReports() {
 	});			
 }
 
-function loadSettings() {		
+function loadSettings() {
 	IDcontent.stop().fadeOut(50);
 	IDcontent.html('');
 	$.post('auth/ajax/settings.php', function(data) {
