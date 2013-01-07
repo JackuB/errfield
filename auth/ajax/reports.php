@@ -7,7 +7,7 @@
 
 <script type='text/javascript'>
 var chartData = [<?php
-$chart = DB::query("SELECT time, redirectTime, requestTime, responseTime, domProcessingTime, domLoadingTime, loadEventTime, from_unixtime(time,'%Y-%m-%d') FROM performance ORDER BY from_unixtime(time,'%Y-%m-%d') DESC;");
+$chart = DB::query("SELECT time, redirectTime, requestTime, responseTime, domProcessingTime, domLoadingTime, loadEventTime, from_unixtime(time,'%Y-%m-%d') FROM performance ORDER BY from_unixtime(time,'%Y-%m-%d') ASC;");
 $groups = array();
 foreach ($chart as $item) {
     $key = $item["from_unixtime(time,'%Y-%m-%d')"];
