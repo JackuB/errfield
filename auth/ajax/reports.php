@@ -30,34 +30,34 @@ foreach($groups as $date) {
     }
 
     echo "{";
-    echo "datetime: \"" . gmdate("Y-m-d", $date["items"][$count]["time"]) . "\",";
+    echo "datetime: \"" . gmdate("Y-m-d", $date["items"][$count]["time"]) . "\",\n";
 
     aasort($date["items"],"redirectTime");
-    echo "redirectTime: " . $date["items"][$count]["redirectTime"] . ",";
+    echo "redirectTime: " . $date["items"][$count]["redirectTime"] . ",\n";
 
     aasort($date["items"],"requestTime");
-    echo "requestTime: " . $date["items"][$count]["requestTime"] . ",";
+    echo "requestTime: " . $date["items"][$count]["requestTime"] . ",\n";
 
     aasort($date["items"],"responseTime");
-    echo "responseTime: " . $date["items"][$count]["responseTime"] . ",";
+    echo "responseTime: " . $date["items"][$count]["responseTime"] . ",\n";
 
     aasort($date["items"],"domProcessingTime");
-    echo "domProcessingTime: " . $date["items"][$count]["domProcessingTime"] . ",";
+    echo "domProcessingTime: " . $date["items"][$count]["domProcessingTime"] . ",\n";
 
     aasort($date["items"],"domLoadingTime");
-    echo "domLoadingTime: " . $date["items"][$count]["domLoadingTime"] . ",";
+    echo "domLoadingTime: " . $date["items"][$count]["domLoadingTime"] . ",\n";
 
     aasort($date["items"],"loadEventTime");
     echo "loadEventTime: " . $date["items"][$count]["loadEventTime"];
 
-    echo "},";
+    echo "},\n\n";
+    /*
+    * TODO: remove ',' for last entry
+    */
 }
 unset($date);
 ?>
-
 ];
-
-
     // SERIAL CHART
     chart = new AmCharts.AmSerialChart();
     
