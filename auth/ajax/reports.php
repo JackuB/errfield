@@ -3,7 +3,7 @@
 ?>
 <h1>Application performance report</h1>
 
-<div id="chartdiv" style="width: 100%; height: 362px;"></div>
+<div id="chartdiv" style="width: 100%; height: 400px;"></div>
 
 <script type='text/javascript'>
 var chartData = [<?php

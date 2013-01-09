@@ -3,7 +3,7 @@
 
 	$type = DB::query("SELECT type, typename FROM types;");
 
-	$results = DB::query("SELECT id, type, state, time, text, file, line, COUNT(*) as count, MAX(time) AS lastoccurence FROM events GROUP BY text ORDER BY count DESC;");
+	$results = DB::query("SELECT id, type, state, time, text, file, line, COUNT(*) as count, MAX(time) AS lastoccurence FROM events WHERE state='unsolved' GROUP BY text ORDER BY count DESC;");
 
 	foreach ($results as $event) {
 ?>
@@ -24,11 +24,11 @@
 	        </div>
 	    </div>
     	<div class="pull-right">
-	        <a href="#" class="button ignore">
+	        <a href="#" class="button ignore" data-attr="<?php echo $event['id'] ?>">
 	            <?php echo _('Ignore'); ?>
 	        </a>
-	        <a href="#" class="button solved">
-	            <?php echo _('Solved'); ?>
+	        <a href="#" class="button solve" data-attr="<?php echo $event['id'] ?>">
+	            <?php echo _('Solve'); ?>
 	        </a>                
         </div>  
         <div class="clearfix"></div>      

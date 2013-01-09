@@ -10,6 +10,25 @@ $(document).on("click", ".description, .button.detail, .metainfo a", function(e)
 	});	
 });
 
+$(document).on("click", ".button.ignore, .button.solve", function(e){
+	e.preventDefault();
+	/*
+	 *
+	 * TODO: action confirmation + better feedback (# of occurences)
+	 *
+	*/
+	var eventId = $(this).attr('data-attr');
+	var $thisElem = $(this);
+	if($(this).hasClass('ignore')) {
+		var methodPar = "ignore";
+	} else {
+		var methodPar = "solve";
+	}
+	$.post('auth/ajax/update.php', {id: eventId, method: methodPar}, function() {
+		$thisElem.parent().parent().parent().slideUp("slow");
+	});	
+});
+
 function loadErrors() {
 	IDcontent.stop().fadeOut(50);
 	IDcontent.html('');	
