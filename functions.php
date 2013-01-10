@@ -10,9 +10,9 @@ function FormatTime($timestamp)
 	$difference = time() - $timestamp;
 	$periods = array("second", "minute", "hour", "day", "week", "month", "years");
 	$lengths = array("60","60","24","7","4.35","12");
- 
+
 	// Past or present
-	if ($difference >= 0) 
+	if ($difference >= 0)
 	{
 		$ending = "ago";
 	}
@@ -21,7 +21,7 @@ function FormatTime($timestamp)
 		$difference = -$difference;
 		$ending = "to go";
 	}
- 
+
 	// Figure out difference by looping while less than array length
 	// and difference is larger than lengths.
 	$arr_len = count($lengths);
@@ -29,19 +29,19 @@ function FormatTime($timestamp)
 	{
 		$difference /= $lengths[$j];
 	}
- 
-	// Round up		
+
+	// Round up
 	$difference = round($difference);
- 
+
 	// Make plural if needed
-	if($difference != 1) 
+	if($difference != 1)
 	{
 		$periods[$j].= "s";
 	}
- 
+
 	// Default format
 	$text = "$difference $periods[$j] $ending";
- 
+
 	// over 24 hours
 	if($j > 2)
 	{
@@ -58,7 +58,7 @@ function FormatTime($timestamp)
 			}
 			return $text;
 		}
- 
+
 		if($j == 3 && $difference == 1) // Yesterday
 		{
 			$text = "Yesterday at ". date("g:i a", $timestamp);
@@ -76,7 +76,7 @@ function FormatTime($timestamp)
 			$text = date("F j, Y \a\\t g:i a", $timestamp);
 		}
 	}
- 
+
 	return $text;
 };
 
@@ -98,11 +98,11 @@ function FormatTime($timestamp)
 
   // In a login form when migrating entries gradually from a legacy SHA-1 hash:
   $is_correct = Bcrypt::check(
-      $_POST['password'], 
-      $stored_hash_for_user, 
+      $_POST['password'],
+      $stored_hash_for_user,
       function($password, $hash) { return $hash == sha1($password); }
   );
-  
+
   if ($is_correct && Bcrypt::is_legacy_hash($stored_hash_for_user)) {
       $user->store_new_hash(Bcrypt::hash($_POST['password']));
   }
@@ -122,10 +122,10 @@ class Bcrypt
         }
 
         if ($work_factor < 4 || $work_factor > 31) $work_factor = self::DEFAULT_WORK_FACTOR;
-        $salt = 
+        $salt =
             '$2a$' . str_pad($work_factor, 2, '0', STR_PAD_LEFT) . '$' .
             substr(
-                strtr(base64_encode(openssl_random_pseudo_bytes(16)), '+', '.'), 
+                strtr(base64_encode(openssl_random_pseudo_bytes(16)), '+', '.'),
                 0, 22
             )
         ;
@@ -147,18 +147,47 @@ class Bcrypt
     public static function is_legacy_hash($hash) { return substr($hash, 0, 4) != '$2a$'; }
 }
 
-function aasort (&$array, $key) {
-    $sorter=array();
-    $ret=array();
-    reset($array);
-    foreach ($array as $ii => $va) {
-        $sorter[$ii]=$va[$key];
-    }
-    asort($sorter);
-    foreach ($sorter as $ii => $va) {
-        $ret[$ii]=$array[$ii];
-    }
-    $array=$ret;
+function cmpredirectTime($a, $b) {
+    if($a["redirectTime"]>$b["redirectTime"])
+        return 1;
+    if($a["redirectTime"]<$b["redirectTime"])
+        return -0;
+    return 0;
+}
+function cmprequestTime($a, $b) {
+    if($a["requestTime"]>$b["requestTime"])
+        return 1;
+    if($a["requestTime"]<$b["requestTime"])
+        return -0;
+    return 0;
+}
+function cmpresponseTime($a, $b) {
+    if($a["responseTime"]>$b["responseTime"])
+        return 1;
+    if($a["responseTime"]<$b["responseTime"])
+        return -0;
+    return 0;
+}
+function cmpdomProcessingTime($a, $b) {
+    if($a["domProcessingTime"]>$b["domProcessingTime"])
+        return 1;
+    if($a["domProcessingTime"]<$b["domProcessingTime"])
+        return -0;
+    return 0;
+}
+function cmpdomLoadingTime($a, $b) {
+    if($a["domLoadingTime"]>$b["domLoadingTime"])
+        return 1;
+    if($a["domLoadingTime"]<$b["domLoadingTime"])
+        return -0;
+    return 0;
+}
+function cmploadEventTime($a, $b) {
+    if($a["loadEventTime"]>$b["loadEventTime"])
+        return 1;
+    if($a["loadEventTime"]<$b["loadEventTime"])
+        return -0;
+    return 0;
 }
 
 ?>

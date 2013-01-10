@@ -1,5 +1,5 @@
 <?php
-    require_once '../../config.php'; 
+    require_once '../../config.php';
 ?>
 <h1>Application performance report</h1>
 
@@ -21,7 +21,7 @@ foreach ($chart as $item) {
         $groups[$key]['count'] += 1;
     }
 }
-
+$i = 1;
 foreach($groups as $date) {
     if($date["count"] > 1) {
         $count = round($date["count"]/2);
@@ -32,22 +32,26 @@ foreach($groups as $date) {
     echo "{";
     echo "datetime: \"" . gmdate("Y-m-d", $date["items"][$count]["time"]) . "\",\n";
 
-    aasort($date["items"],"redirectTime");
+    usort($date["items"], "cmpredirectTime");
     echo "redirectTime: " . $date["items"][$count]["redirectTime"] . ",\n";
 
-    aasort($date["items"],"requestTime");
+    usort($date["items"], "cmprequestTime");
     echo "requestTime: " . $date["items"][$count]["requestTime"] . ",\n";
 
-    aasort($date["items"],"responseTime");
+    usort($date["items"], "cmpresponseTime");
     echo "responseTime: " . $date["items"][$count]["responseTime"] . ",\n";
 
-    aasort($date["items"],"domProcessingTime");
-    echo "domProcessingTime: " . $date["items"][$count]["domProcessingTime"] . ",\n";
 
-    aasort($date["items"],"domLoadingTime");
+    usort($date["items"], "cmpdomProcessingTime");
+    echo "domProcessingTime: " . $date["items"][$count]["domProcessingTime"] . ",\n";
+    /*if($i == 1) {
+      $test = $date["items"];
+    }
+  $i++;*/
+    usort($date["items"], "cmpdomLoadingTime");
     echo "domLoadingTime: " . $date["items"][$count]["domLoadingTime"] . ",\n";
 
-    aasort($date["items"],"loadEventTime");
+    usort($date["items"], "cmploadEventTime");
     echo "loadEventTime: " . $date["items"][$count]["loadEventTime"];
 
     echo "},\n\n";
@@ -60,7 +64,7 @@ unset($date);
 ];
     // SERIAL CHART
     chart = new AmCharts.AmSerialChart();
-    
+
     chart.pathToImages = "http://www.amcharts.com/lib/images/";
     chart.zoomOutButton = {
         backgroundColor: '#000000',
@@ -69,7 +73,7 @@ unset($date);
     chart.dataProvider = chartData;
     chart.marginTop = 10;
     chart.autoMarginOffset = 3;
-    chart.marginRight = 0;        
+    chart.marginRight = 0;
     chart.categoryField = "datetime";
 
     // AXES
@@ -119,7 +123,7 @@ unset($date);
     graph.valueField = "domProcessingTime";
     graph.lineAlpha = 1;
     graph.fillAlphas = 0.6;
-    chart.addGraph(graph); 
+    chart.addGraph(graph);
 
     graph = new AmCharts.AmGraph();
     graph.type = "line";
@@ -127,7 +131,7 @@ unset($date);
     graph.valueField = "domLoadingTime";
     graph.lineAlpha = 1;
     graph.fillAlphas = 0.6;
-    chart.addGraph(graph);    
+    chart.addGraph(graph);
 
     graph = new AmCharts.AmGraph();
     graph.type = "line";
@@ -135,7 +139,7 @@ unset($date);
     graph.valueField = "loadEventTime";
     graph.lineAlpha = 1;
     graph.fillAlphas = 0.6;
-    chart.addGraph(graph);     
+    chart.addGraph(graph);
 
     // LEGEND
     var legend = new AmCharts.AmLegend();
