@@ -40,9 +40,9 @@
 
 <?php
 $homepage = file_get_contents($event[0]['file']);
-echo "<pre data-line=\"14\"><code class=\"language-markup\">";
+echo "<pre class=\"brush: js; highlight: [".$event[0]['line']."]; toolbar: false; html-script: true;\">";
 echo htmlspecialchars($homepage);
-echo "</code></pre>";
+echo "</pre>";
 
 ?>
 

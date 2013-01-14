@@ -1,13 +1,15 @@
 var IDcontent = $('#content');
+SyntaxHighlighter.all();
 
 $(document).on("click", ".description, .button.detail, .metainfo a", function(e){
 	e.preventDefault();
 	var eventId = $(this).attr('data-attr');
 	IDcontent.stop().fadeOut(50);
-	IDcontent.html('');	
+	IDcontent.html('');
 	$.post('auth/ajax/eventDetail.php', {id: eventId}, function(data) {
 		IDcontent.html(data).fadeIn(600);
-	});	
+		SyntaxHighlighter.highlight();
+	});
 });
 
 $(document).on("click", ".button.ignore, .button.solve", function(e){
@@ -26,19 +28,18 @@ $(document).on("click", ".button.ignore, .button.solve", function(e){
 	}
 	$.post('auth/ajax/update.php', {id: eventId, method: methodPar}, function() {
 		$thisElem.parent().parent().parent().slideUp("slow");
-	});	
+	});
 });
 
 function loadErrors() {
 	IDcontent.stop().fadeOut(50);
-	IDcontent.html('');	
+	IDcontent.html('');
 	$.post('auth/ajax/eventLoop.php', function(data) {
 		IDcontent.html(data).fadeIn(600);
-		$('#sidebar a').removeClass("active");		
+		$('#sidebar a').removeClass("active");
 		$('#sidebar a[href="#errors"]').addClass("active");
-		Prism.highlightAll();
-		Prism.highlightElement($('code, form'),true);
-	});			
+		SyntaxHighlighter.highlight();
+	});
 }
 
 function loadReports() {
@@ -48,7 +49,7 @@ function loadReports() {
 		IDcontent.html(data).fadeIn(600);
 		$('#sidebar a').removeClass("active");
 		$('#sidebar a[href="#reports"]').addClass("active");
-	});			
+	});
 }
 
 function loadSettings() {
@@ -58,7 +59,7 @@ function loadSettings() {
 		IDcontent.html(data).fadeIn(600);
 		$('#sidebar a').removeClass("active");
 		$('#sidebar a[href="#settings"]').addClass("active");
-	});			
+	});
 }
 $(document).on("click", "#logo a, #sidebar a", function(e){
 	e.preventDefault();

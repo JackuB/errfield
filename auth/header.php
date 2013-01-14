@@ -23,4 +23,4 @@
         </ul>
     </div>
 
-    <div id="content" class="language-js">
+    <div id="content">
