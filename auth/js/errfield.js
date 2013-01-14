@@ -36,6 +36,8 @@ function loadErrors() {
 		IDcontent.html(data).fadeIn(600);
 		$('#sidebar a').removeClass("active");		
 		$('#sidebar a[href="#errors"]').addClass("active");
+		Prism.highlightAll();
+		Prism.highlightElement($('code, form'),true);
 	});			
 }
 

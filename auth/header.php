@@ -10,7 +10,7 @@
     <script type="text/javascript" src="auth/js/head.load.min.js"></script>
 </head>
 <body>
-    <div id="sidebar" class="hidden-phone">
+    <div id="sidebar">
         <div id="logo">
             <a href="#">
                 <img src="auth/img/errfield_logo.jpg">
@@ -23,4 +23,4 @@
         </ul>
     </div>
 
-    <div id="content">
+    <div id="content" class="language-js">
