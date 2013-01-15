@@ -24,7 +24,7 @@ if(empty($userTest)) {
 			'passwordHash' => htmlspecialchars($hash_for_user)
 		));
 		$_SESSION['errfieldHash']=$hash_for_user;
-		$_SESSION['errfieldUserID']=0;		
+		$_SESSION['errfieldUserID']=0;
 	}
 
 } else {
@@ -32,6 +32,7 @@ if(empty($userTest)) {
 /*
 *
 * TODO: temporary hash key to be used in $_SESSION?
+* TODO: Session timeout?
 *
 */
 
@@ -72,6 +73,8 @@ if(empty($userTest)) {
 			if($is_correct) {
 				$_SESSION['errfieldHash']=$errfieldHash;
 				$_SESSION['errfieldUserID']=$errfieldUserID;
+				header('Location: ?');
+       			exit;
 			} else {
 				die('Incorect password');
 			}
