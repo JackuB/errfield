@@ -13,12 +13,17 @@
 	// Get information about the current browser's user agent
 	$current_browser = $bc->getBrowser();
 
+	// Get user IP
+	$ip=$_SERVER['REMOTE_ADDR'];
+
+	// Get referring URL
+	$url=$_SERVER['HTTP_REFERER'];
 
 	if($_POST["type"] == "time") {
 		DB::insert('performance', array(
 			'time' => time(),
-			'url' => htmlspecialchars($_POST["url"]),
-			'ip' => htmlspecialchars($_POST["ip"]),
+			'url' => htmlspecialchars($url),
+			'ip' => htmlspecialchars($ip),
 			'resolution' => htmlspecialchars($_POST["resolution"]),
 			'browser' => htmlspecialchars($current_browser->Browser),
 			'browserVersion' => htmlspecialchars($current_browser->Version),
@@ -40,8 +45,8 @@
 			$newState = "unresolved";
 		}
 		DB::insert('events', array(
-			'ip' => htmlspecialchars($_POST["ip"]),
-			'url' => htmlspecialchars($_POST["url"]),
+			'ip' => htmlspecialchars($ip),
+			'url' => htmlspecialchars($url),
 		  	'elapsedtime' => htmlspecialchars($_POST["elapsedtime"]),
 			'resolution' => htmlspecialchars($_POST["resolution"]),
 			'browser' => htmlspecialchars($current_browser->Browser),

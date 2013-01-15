@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <script>
-            var userIP = "<?php echo $_SERVER['REMOTE_ADDR']?>";
             var xmlhttp;
             var renderStart = new Date().getTime();
             if (window.XMLHttpRequest) {
@@ -12,8 +11,8 @@
             } else {
                 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                 secondxmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }          
-            var userDetail = "&ip="+userIP+"&url="+document.URL+"&resolution="+screen.width+'x'+screen.height;
+            }
+            var userDetail = "&url="+document.URL+"&resolution="+screen.width+'x'+screen.height;
             window.onerror = function (msg, url, line) {
                 window.onerror = function() {};
                 var elapsed = new Date().getTime()-renderStart;
@@ -22,7 +21,7 @@
                 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xmlhttp.send(params);
                 return false;
-            } 
+            }
             window.onload=function() {
                 if (typeof performance != 'undefined') {
                     setTimeout(function(){
@@ -51,8 +50,8 @@
 
                             var params = "type=time&redirectCount="+perfRedir+"&redirectTime="+redirectTime+"&requestTime="+requestTime+"&responseTime="+responseTime+"&domProcessingTime="+domProcessingTime+"&domLoadingTime="+domLoadingTime+"&loadEventTime="+loadEventTime+userDetail;
                             secondxmlhttp.open("POST","/errfield/gate.php",true);
-                            secondxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
-                            secondxmlhttp.send(params);                       
+                            secondxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            secondxmlhttp.send(params);
                         }
                     }, 20);
                 }
@@ -71,7 +70,7 @@
         <![endif]-->
     </head>
     <body>
-        <h1>Hello World</h1>
+        <h1>Hello World - <?php echo $_SERVER['HTTP_REFERER']; ?></h1>
 
         <img src="http://www.echenique.com/wp-content/uploads/2009/12/articles040010010_DSC3862.jpg" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -91,7 +90,7 @@
                         alert(perfif)
                     }, 2000);
                 }
-            }         
+            }  
 
 
     </script>-->
