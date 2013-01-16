@@ -1,3 +1,7 @@
+/* Cache */
+var IDcontent = $('#content');
+
+/* History.js */
 (function(window,undefined){
     // Prepare
     var History = window.History; // Note: We are using a capital H instead of a lower h
@@ -28,18 +32,11 @@
     });
 })(window);
 
-var IDcontent = $('#content');
-
+/* Clickity click */
 $(document).on("click", ".description, .button.detail, .metainfo a", function(e){
 	e.preventDefault();
 	var eventId = $(this).attr('data-attr');
-	IDcontent.stop().fadeOut(50);
-	IDcontent.html('');
-	$.post('auth/ajax/eventDetail.php', {id: eventId}, function(data) {
-		IDcontent.html(data).fadeIn(600);
-		SyntaxHighlighter.highlight();
-		History.pushState({Detail: eventId}, eventId, "?detail="+eventId);
-	});
+	History.pushState({Detail: eventId}, eventId, "?detail="+eventId);
 });
 
 $(document).on("click", ".button.ignore, .button.solve", function(e){
@@ -69,7 +66,6 @@ function loadErrors() {
 		$('#sidebar a').removeClass("active");
 		$('#sidebar a[href="#errors"]').addClass("active");
 		SyntaxHighlighter.highlight();
-		History.pushState({}, "Homepage", "?");
 	});
 }
 
@@ -80,7 +76,6 @@ function loadReports() {
 		IDcontent.html(data).fadeIn(600);
 		$('#sidebar a').removeClass("active");
 		$('#sidebar a[href="#reports"]').addClass("active");
-		History.pushState({}, "Reports", "?reports");
 	});
 }
 
@@ -91,20 +86,19 @@ function loadSettings() {
 		IDcontent.html(data).fadeIn(600);
 		$('#sidebar a').removeClass("active");
 		$('#sidebar a[href="#settings"]').addClass("active");
-		History.pushState({}, "Settings", "?settings");
 	});
 }
 $(document).on("click", "#logo a, #sidebar a", function(e){
 	e.preventDefault();
 });
 $(document).on("click", "#logo a, #sidebar a[href='#errors']", function(){
-	loadErrors();
+	History.pushState({}, "Homepage", "?");
 });
 $(document).on("click", "#sidebar a[href='#reports']", function(){
-	loadReports();
+	History.pushState({}, "Reports", "?reports");
 });
 $(document).on("click", "#sidebar a[href='#settings']", function(){
-	loadSettings();
+	History.pushState({}, "Settings", "?settings");
 });
 
 /* Initial page load from pushed history state as get param */
@@ -115,13 +109,12 @@ if(window.location.search == "?" || window.location.search == "") {
 } else if (window.location.search == "?settings") {
 	loadSettings();
 } else {
-	var eventId = window.location.search.match(/[0-9]+/g);
+	var eventId = /\d+(?:\.\d+)?/.exec(window.location.search);
  	IDcontent.stop().fadeOut(50);
 	IDcontent.html('');
-	$.post('auth/ajax/eventDetail.php', {id: eventId}, function(data) {
+	$.post('auth/ajax/eventDetail.php', {id: eventId[0]}, function(data) {
 		IDcontent.html(data).fadeIn(600);
 		SyntaxHighlighter.highlight();
-		History.pushState({Detail: eventId}, eventId, "?detail="+eventId);
 	});
 }
 
