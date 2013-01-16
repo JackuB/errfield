@@ -4,7 +4,7 @@
 	<?php
 		$type = DB::query("SELECT type, typename FROM types;");
 		$eventID = $_POST['id'];
-		$event = DB::query("SELECT *, COUNT(*) as count, MAX(time) AS lastoccurence FROM events WHERE id=%s;",$eventID);
+		$event = DB::query("SELECT *, COUNT(*) as count, MAX(time) AS lastoccurence FROM events WHERE id=%i ORDER BY time DESC;",$eventID);
 		$eventText = htmlspecialchars($event[0]['text']);
 	?>
 
@@ -39,11 +39,29 @@
 
 
 <?php
-$homepage = file_get_contents($event[0]['file']);
-echo "<pre class=\"brush: js; highlight: [".$event[0]['line']."]; toolbar: false; html-script: true;\">";
-echo htmlspecialchars($homepage);
-echo "</pre>";
-
+	if($event[0]['line'] != 0) {
+		$line = $event[0]['line'];
+		$lines = file($event[0]['file']);
+		if(isset($lines[$line+5])) {
+			echo "<pre class=\"brush: js; highlight: [".$event[0]['line']."]; toolbar: false; html-script: true; first-line: ".($line-4)."\">";
+			echo htmlspecialchars($lines[$line-5]);
+			echo htmlspecialchars($lines[$line-4]);
+			echo htmlspecialchars($lines[$line-3]);
+			echo htmlspecialchars($lines[$line-2]);
+			echo htmlspecialchars($lines[$line-1]);
+			echo htmlspecialchars($lines[$line]);
+			echo htmlspecialchars($lines[$line+1]);
+			echo htmlspecialchars($lines[$line+2]);
+			echo htmlspecialchars($lines[$line+3]);
+			echo htmlspecialchars($lines[$line+4]);
+			echo htmlspecialchars($lines[$line+5]);
+			echo "</pre>";
+		} else {
+			echo "<h3 class=\"well\">File has changed or couldn't be fetched</h3>";
+		}
+	} else {
+		echo "<h3 class=\"well\">Looks like error happened in external JS file or there was error with reported line and/or url.</h3>";
+	}
 ?>
 
 	<?php
