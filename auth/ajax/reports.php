@@ -7,7 +7,8 @@
 
 <script type='text/javascript'>
 var chartData = [<?php
-$chart = DB::query("SELECT time, redirectTime, requestTime, responseTime, domProcessingTime, domLoadingTime, loadEventTime, from_unixtime(time,'%Y-%m-%d') FROM performance ORDER BY from_unixtime(time,'%Y-%m-%d') ASC;");
+$chart = DB::query("SELECT time, redirectTime, requestTime, responseTime, domProcessingTime, domLoadingTime, loadEventTime, from_unixtime(time,'%Y-%m-%d') FROM performance WHERE from_unixtime(time,'%Y-%m-%d') BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND CURDATE() ORDER BY from_unixtime(time,'%Y-%m-%d') ASC;");
+
 $groups = array();
 foreach ($chart as $item) {
     $key = $item["from_unixtime(time,'%Y-%m-%d')"];
@@ -30,7 +31,7 @@ foreach($groups as $date) {
     }
 
     echo "{";
-    echo "datetime: \"" . gmdate("Y-m-d", $date["items"][$count]["time"]) . "\",\n";
+    echo "datetime: \"" . gmdate("m/d", $date["items"][$count]["time"]) . "\",\n";
 
     usort($date["items"], "cmpredirectTime");
     echo "redirectTime: " . $date["items"][$count]["redirectTime"] . ",\n";
@@ -44,10 +45,7 @@ foreach($groups as $date) {
 
     usort($date["items"], "cmpdomProcessingTime");
     echo "domProcessingTime: " . $date["items"][$count]["domProcessingTime"] . ",\n";
-    /*if($i == 1) {
-      $test = $date["items"];
-    }
-  $i++;*/
+
     usort($date["items"], "cmpdomLoadingTime");
     echo "domLoadingTime: " . $date["items"][$count]["domLoadingTime"] . ",\n";
 
