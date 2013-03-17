@@ -2,60 +2,10 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <script>
-            var xmlhttp;
-            var renderStart = new Date().getTime();
-            if (window.XMLHttpRequest) {
-                xmlhttp=new XMLHttpRequest();
-                secondxmlhttp=new XMLHttpRequest();
-            } else {
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-                secondxmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            var userDetail = "&url="+document.URL+"&resolution="+screen.width+'x'+screen.height;
-            window.onerror = function (msg, url, line) {
-                window.onerror = function() {};
-                var elapsed = new Date().getTime()-renderStart;
-                var params = "type=0&text="+msg+"&line="+line+"&file="+url+"&elapsedtime="+elapsed+userDetail;
-                xmlhttp.open("POST","/errfield/gate.php",true);
-                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xmlhttp.send(params);
-                return false;
-            }
-            window.onload=function() {
-                if (typeof performance != 'undefined') {
-                    setTimeout(function(){
-                        if(performance.navigation.type == 0) {
-                            var perfRedir = performance.navigation.redirectCount;
-
-                            var perfStart = performance.timing.navigationStart;
-                            var perfReqStart = performance.timing.requestStart;
-                            var perfResStart = performance.timing.responseStart;
-                            var perfResEnd = performance.timing.responseEnd;
-                            var perfDomLoading = performance.timing.domLoading;
-                            var perfDomInter = performance.timing.domInteractive;
-                            var perfLoadStart = performance.timing.loadEventStart;
-                            var perfLoadEnd = performance.timing.loadEventEnd;
-
-                            var redirectTime = perfReqStart - perfStart;
-                            var requestTime = perfResStart - perfReqStart;
-                            var responseTime = perfResEnd - perfResStart;
-                            var domProcessingTime = perfDomInter - perfDomLoading;
-                            var domLoadingTime = perfLoadStart - perfDomInter;
-                            if(perfLoadEnd > 0) {
-                                var loadEventTime = perfLoadEnd - perfLoadStart;
-                            } else {
-                                var loadEventTime = 0;
-                            }
-
-                            var params = "type=time&redirectCount="+perfRedir+"&redirectTime="+redirectTime+"&requestTime="+requestTime+"&responseTime="+responseTime+"&domProcessingTime="+domProcessingTime+"&domLoadingTime="+domLoadingTime+"&loadEventTime="+loadEventTime+userDetail;
-                            secondxmlhttp.open("POST","/errfield/gate.php",true);
-                            secondxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                            secondxmlhttp.send(params);
-                        }
-                    }, 20);
-                }
-            }
+        <script>var b=(new Date).getTime(),c=[],f=[];window.XMLHttpRequest?(c=new XMLHttpRequest,f=new XMLHttpRequest):(c=new ActiveXObject("Microsoft.XMLHTTP"),f=new ActiveXObject("Microsoft.XMLHTTP"));var l="&resolution="+screen.width+"x"+screen.height;
+window.onerror=function(a,d,e){window.onerror=function(){};a="type=0&text="+a+"&line="+e+"&file="+d+"&elapsedtime="+((new Date).getTime()-b)+l;c.open("POST","/errfield/gate.php",!0);c.setRequestHeader("Content-type","application/x-www-form-urlencoded");c.send(a);return!1};
+window.onload=function(){"undefined"!=typeof performance&&setTimeout(function(){if(0===performance.navigation.type){var a=performance.navigation.redirectCount,d=performance.timing.requestStart,e=performance.timing.responseStart,g=performance.timing.domInteractive,h=performance.timing.loadEventStart,j=performance.timing.loadEventEnd,m=d-performance.timing.navigationStart,n=performance.timing.responseEnd-e,p=g-performance.timing.domLoading,k=0;0<j&&(k=j-h);a="type=time&redirectCount="+a+"&redirectTime="+
+m+"&requestTime="+(e-d)+"&responseTime="+n+"&domProcessingTime="+p+"&domLoadingTime="+(h-g)+"&loadEventTime="+k+l;f.open("POST","/errfield/gate.php",!0);f.setRequestHeader("Content-type","application/x-www-form-urlencoded");f.send(a)}},20)};
         </script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
@@ -82,13 +32,12 @@
 
 
 
-        <!--<script type="text/javascript">
+        <<script type="text/javascript">
 
-           window.onload=function() {
                 if (typeof performance != 'undefined') {
                     setTimeout(function(){
                         alert(perfif)
-                    }, 2000);
+                    }, 6000);
                 }
             }  
 
