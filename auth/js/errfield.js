@@ -14,7 +14,7 @@ var IDcontent = $('#content');
     History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
         var State = History.getState(); // Note: We are using History.getState() instead of event.state
         //History.log(State.data, State.title, State.url);
-		if(State.title == "Homepage" || State.title == "") {
+		if(State.title == "Homepage" || State.title === "") {
 			loadErrors();
 		} else if (State.title == "Reports") {
 			loadReports();
@@ -86,6 +86,7 @@ function loadSettings() {
 		IDcontent.html(data).fadeIn(600);
 		$('#sidebar a').removeClass("active");
 		$('#sidebar a[href="#settings"]').addClass("active");
+		SyntaxHighlighter.highlight();
 	});
 }
 $(document).on("click", "#logo a, #sidebar a", function(e){

@@ -1,4 +1,8 @@
 <?php
+
+	// Allow cross domain origin
+	header('Access-Control-Allow-Origin: *');
+
 	require_once 'config.php';
 
 	// Loads the class
