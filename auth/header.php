@@ -15,6 +15,7 @@
     <script type="text/javascript" src="auth/js/head.load.min.js"></script>
 </head>
 <body>
+    <div id="wrapper">
     <div id="sidebar">
         <div id="logo">
             <a href="#home">
@@ -31,6 +32,7 @@
                 </li>
             <?php } ?>
         </ul>
+        <div class="clearfix"></div>
     </div>
 
     <div id="projectDetail">

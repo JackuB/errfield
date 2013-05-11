@@ -39,7 +39,7 @@
 
         <a class="projectSwitch stats" href="javascript:;">
             <span class="number">
-                <?=$median[count($median)/2]?> ms
+                <?=number_format($median[count($median)/2], 0, ',', ' ');?> ms
             </span><br />
             <span class="text">
                 Median load time

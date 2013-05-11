@@ -27,14 +27,22 @@ html, body {
 	outline:none;
 }
 
+#wrapper{
+float: right;
+width: 100%;
+min-height: 100%;
+margin-left: -640px; /*Set left margin to -(leftColumnWidth + RightColumnWidth)*/
+}
+
 #sidebar {
 	width:320px;
 	background: #090909;
 	border-right:1px solid #e2e2e2;
 	float:left;
 	height:100%;
-	position: relative;
+	position: fixed;
 	z-index:1000;
+	overflow:auto;
 	#logo {
 		height:180px;
 		a {
@@ -78,12 +86,13 @@ html, body {
 	display:none;
 	width:320px;
 	float:left;
-	margin-left:320px;
 	background:white;
 	min-height:100%;
 	text-align: center;
-	position: relative;
+	position: fixed;
 	z-index:900;
+	left:320px;
+	overflow:auto;
 	h2 {
 		font-size: 28px;
 		color:black;
@@ -117,141 +126,45 @@ html, body {
 #content {
 	display:none;
 	padding:50px;
-	width:auto;
 	margin-left: 640px;
 	position: relative;
 	z-index:800;
 	.event {
-		.type {
-			font-size:11px;
-			font-family: @monoFontFamily;
+		background:url('../img/eventDetailIco.png') center left no-repeat #404238;
+		-moz-box-shadow: inset 0 0 5px #333;
+		-webkit-box-shadow: inset 0 0 5px #333;
+		box-shadow: inset 0 0 5px #333;
+		padding:15px 15px 5px 100px;
+		color: #fff;
+		font-family: @monoFontFamily;
+		font-size: 14px;
+		text-shadow: 0 1px 0 #000;
+		.eventMeta {
+			font-size: 12px;
+			color:#777871;
 			text-transform: uppercase;
-			line-height: 1;
+			a {
+				color:#777871;
+				&:hover {
+					color:white;
+				}
+			}
+		}
+		.errorText {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space:nowrap;
+			display:block;
 			clear:both;
-			text-shadow:1px 1px 0 #eee;
-			&.typeError {
-				color:#bf0404;
-			}
-			&.typeEvent {
-				color:#bf0404;
-			}
+			padding-top:8px;
+			padding-bottom: 7px;
 		}
 		.description {
-			background-color: #404238;
-			-moz-box-shadow: inset 0 0 5px #929292;
-			-webkit-box-shadow: inset 0 0 5px #929292;
-			box-shadow: inset 0 0 5px #333;
-			padding:15px 15px 5px 15px;
-			color: #fff;
-			font-family: @monoFontFamily;
-			font-size: 14px;
-			text-shadow: 0 1px 0 #000;
-			cursor:pointer;
-			position:relative;
-			z-index:10;
 			.fileInfo {
 				text-align:right;
-				clear:both;
-				color:#999;
-				font-size:11px;
-				line-height: 1.1;
-			}
-		}
-		.bottom {
-			margin-top:1px;
-			clear:both;
-			margin-bottom:45px;
-			.button {
-				display:inline-block;
-				font-size: 14px;
-				font-weight: 700;
-				color:white;
-				background:#444;
-				padding:5px 6px;
-				text-transform: uppercase;
-				opacity:0.9;
-				&:hover {
-					opacity:1;
-					text-decoration: none;
-				}
-				&.detail {
-					float:left;
-					background:#587ea0;
-				}
-				&.ignore {
-					float:right;
-					background: #d97e7e;
-				}
-				&.solve {
-					float:right;
-					background: #52948f;
-				}
-
-			}
-			.metainfo {
-				float:left;
-				display:inline-block;
-				padding:12px 10px 0 20px;
-				font-size:10px;
-				color:#555555;
-				a {
-					font-weight: 700;
-					text-decoration: underline;
-					color:#555555;
-				}
-				&:hover, &:hover a {
-					color:#000;
-				}
-			}
-		}
-	}
-}
-
-@media (min-width: 869px) {
-	#sidebar {
-		position: fixed;
-		top:0;
-		left:0;
-		bottom:0;
-		min-height:100%;
-	}
-}
-
-@media (max-width: 868px) {
-	#content {
-		padding:5px;
-		margin:0;
-		.event {
-			.description {
+				color:#777871;
 				font-size:12px;
-				padding:5px;
-			}
-		}
-	}
-	#sidebar {
-		position:fixed;
-		width:100%;
-		height:45px;
-		overflow:hidden;
-		bottom:0;
-		left:0;
-		right:0;
-		z-index:15;
-		#logo {
-			display:none;
-		}
-		ul {
-			margin:0;
-			li a {
-				display:block;
-				width:33.3%;
-				float:left;
-				height:45px;
-				padding:3px 0;
-				i {
-					display:block;
-					clear:both;
-				}
+				line-height: 1.1;
 			}
 		}
 	}

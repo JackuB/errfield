@@ -3,6 +3,7 @@ SyntaxHighlighter.all();
 
 // DOM cache
 var projectDetail = $("#projectDetail");
+var content = $("#content");
 
 // Client-side routes
 Sammy(function() {
@@ -12,6 +13,9 @@ Sammy(function() {
     		projectDetail.html(data);
         	showProjectDetail();
         	$("#sidebar ul li").find('a[href="#project/'+projectId+'"]').addClass("active");
+        	$.post("auth/ajax/eventLoop.php", {id: projectId}, function(data) {
+        		content.html(data);
+        	});
         });
     });
 
@@ -26,12 +30,14 @@ Sammy(function() {
 
 
 function showOnlyHomepage() {
-	projectDetail.animate({"left":"-320px","opacity":"0"});
+	projectDetail.animate({"left":"0px","opacity":"0"});
+	content.animate({"left":"-640px","opacity":"0"});
 	$("#sidebar ul li").find("a").removeClass("active");
 }
 
 function showProjectDetail() {
-	projectDetail.show().css("opacity","0").animate({"left":"0px","opacity":"1"});
+	projectDetail.show().css("opacity","0").animate({"left":"320px","opacity":"1"});
+	content.show().css("opacity","0").animate({"left":"0px","opacity":"1"});
 }
 
 

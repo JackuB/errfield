@@ -1,6 +1,7 @@
 </div>
 
-
+</div>
+<div class="clearfix"></div>
 
 	<script type="text/javascript">
 	head.js(
