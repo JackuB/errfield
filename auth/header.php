@@ -1,3 +1,8 @@
+<?php
+    require_once 'config.php';
+
+    $listProject = DB::query("SELECT id, name, url, table_name FROM projects");
+?>
 <!DOCTYPE html>
 <html class="no-js">
 <head>
@@ -17,12 +22,36 @@
             </a>
         </div>
         <ul>
-            <li><a href="#errors"><i class="icon-attention"></i> <?php echo _('Errors'); ?></a></li>
-            <li><a href="#reports"><i class="icon-chart"></i> <?php echo _('Reports'); ?></a></li>
-            <li><a href="#settings"><i class="icon-wrench"></i> <?php echo _('Settings'); ?></a></li>
+            <?php foreach($listProject as $project) { ?>
+                <li>
+                    <a href="#project/<?=$project["id"]?>">
+                        <span class="title"><?=$project["name"]?></span><br />
+                        <span class="url"><?=$project["url"]?></span>
+                    </a>
+                </li>
+            <?php } ?>
         </ul>
     </div>
 
-    <div id="projectDetail">xxx</div>
+    <div id="projectDetail">
+        <h2>Project name</h2>
+        <a class="projectSwitch error" href="javascript:;">
+            <span class="number">
+                16
+            </span><br />
+            <span class="text">
+                Unsolved errors
+            </span>
+        </a>
+
+        <a class="projectSwitch stats" href="javascript:;">
+            <span class="number">
+                1 836 ms
+            </span><br />
+            <span class="text">
+                Median load time
+            </span>
+        </a>
+    </div>
 
     <div id="content">
