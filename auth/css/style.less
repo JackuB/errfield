@@ -2,26 +2,39 @@
 @import "shCore.less";
 @import "shCoreDefault.less";
 @import "shThemeMidnight.less";
+
 // Fontelo custom build
 @import "fontello.less";
-// errfield styles
+
+// twitter bootstrap
 @import "bootstrap/bootstrap.less";
 
-@monospaceFont: Consolas,"Andale Mono","Lucida Console","DejaVu Sans Mono",Monaco,"Courier New",monospace;
+// open sans
+@import url(http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext);
 
 html, body {
 	height:100%;
 	background:#dcdcdc;
+	margin:0;
+	padding:0;
+}
+
+// box model and remove outline
+* {
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+	outline:none;
 }
 
 #sidebar {
-	width:300px;
-	background: black;
-	border-right:1px solid #eee;
+	width:320px;
+	background: #090909;
+	border-right:1px solid #e2e2e2;
+	float:left;
+	height:100%;
 	#logo {
 		height:180px;
-		background: #090909;
-		border-bottom:2px solid #404040;
 		a {
 			text-align: center;
 			display: block;
@@ -51,15 +64,22 @@ html, body {
 	}
 }
 
+#projectDetail {
+	width:320px;
+	float:left;
+	margin-left:320px;
+	background:white;
+	height:100%;
+}
+
 #content {
 	padding:50px;
 	width:auto;
-	margin-left: 300px;
+	margin-left: 640px;
 	.event {
-		max-width:1200px;
 		.type {
 			font-size:11px;
-			font-family: @monospaceFont;
+			font-family: @monoFontFamily;
 			text-transform: uppercase;
 			line-height: 1;
 			clear:both;
@@ -78,7 +98,7 @@ html, body {
 			box-shadow: inset 0 0 5px #333;
 			padding:15px 15px 5px 15px;
 			color: #fff;
-			font-family: @monospaceFont;
+			font-family: @monoFontFamily;
 			font-size: 14px;
 			text-shadow: 0 1px 0 #000;
 			cursor:pointer;

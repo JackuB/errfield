@@ -23,4 +23,6 @@
         </ul>
     </div>
 
+    <div id="projectDetail">xxx</div>
+
     <div id="content">
