@@ -8,15 +8,15 @@ var content = $("#content");
 // Client-side routes
 Sammy(function() {
     this.get("project/:project_id",function() {
-        ajaxLoadState(this.params['project_id'],true,false);
+        ajaxLoadState(this.params['project_id'],true,false,'');
     });
 
     this.get("project/:project_id/event/:event_id",function() {
-        console.log("Hello");
+        ajaxLoadState(this.params['project_id'],true,true,this.params['event_id']);
     });
 
     this.get("project/:project_id/performance",function() {
-        ajaxLoadState(this.params['project_id'],false,false);
+        ajaxLoadState(this.params['project_id'],false,false,'');
     });
 
     this.get("home",function() {
@@ -31,10 +31,12 @@ Sammy(function() {
     Is this error or stat tab?
     Is event detail called?
 */
-function ajaxLoadState(projectId,error,eventDetail) {
+function ajaxLoadState(projectId,error,eventDetail,event_id) {
     var urlToCall = '';
-    if(error === true) {
+    if(error === true && eventDetail !== true) {
         urlToCall = "auth/ajax/eventLoop.php";
+    } else if (eventDetail === true) {
+        urlToCall = "auth/ajax/eventDetail.php";
     } else {
         urlToCall = "auth/ajax/performance.php";
     }
@@ -51,7 +53,7 @@ function ajaxLoadState(projectId,error,eventDetail) {
             $(".projectSwitch.stats").addClass("active");
         }
         $("#sidebar ul li").find('a[href="#project/'+projectId+'"]').addClass("active");
-        $.post(urlToCall, {id: projectId}, function(data) {
+        $.post(urlToCall, {id: projectId, eventId: event_id}, function(data) {
             content.removeClass("loading");
             content.html(data);
         });
