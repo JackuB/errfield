@@ -73,7 +73,7 @@ if(empty($userTest)) {
 			if($is_correct) {
 				$_SESSION['errfieldHash']=$errfieldHash;
 				$_SESSION['errfieldUserID']=$errfieldUserID;
-				header('Location: ?');
+				header('Location: #');
        			exit;
 			} else {
 				die('Incorect password');

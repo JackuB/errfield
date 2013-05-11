@@ -1,5 +1,5 @@
 /*!
- * Bootstrap v2.2.2
+ * Bootstrap v2.3.1
  *
  * Copyright 2012 Twitter, Inc
  * Licensed under the Apache License v2.0
@@ -8,12 +8,12 @@
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
 
-// CSS Reset
-@import "reset.less";
-
 // Core variables and mixins
 @import "variables.less"; // Modify this for custom colors, font-sizes, etc
 @import "mixins.less";
+
+// CSS Reset
+@import "reset.less";
 
 // Grid system and page structure
 @import "scaffolding.less";
@@ -21,22 +21,22 @@
 @import "layouts.less";
 
 // Base CSS
-//@import "type.less";
-//@import "code.less";
-//@import "forms.less";
-//@import "tables.less";
+@import "type.less";
+@import "code.less";
+@import "forms.less";
+@import "tables.less";
 
 // Components: common
 //@import "sprites.less";
 //@import "dropdowns.less";
 @import "wells.less";
-//@import "component-animations.less";
+@import "component-animations.less";
 //@import "close.less";
 
 // Components: Buttons & Alerts
-//@import "buttons.less";
-//@import "button-groups.less";
-//@import "alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
+@import "buttons.less";
+@import "button-groups.less";
+@import "alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
 
 // Components: Nav
 //@import "navs.less";
@@ -53,70 +53,13 @@
 // Components: Misc
 //@import "thumbnails.less";
 //@import "media.less";
-//@import "labels-badges.less";
-//@import "progress-bars.less";
+@import "labels-badges.less";
+@import "progress-bars.less";
 //@import "accordion.less";
 //@import "carousel.less";
 //@import "hero-unit.less";
 
-// Responsive.less
-// For phone and tablet devices
-// -------------------------------------------------------------
-
-
-// IE10 Metro responsive
-// Required for Windows 8 Metro split-screen snapping with IE10
-// Source: http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
-
-@-ms-viewport{
-  width: device-width;
-}
-
-
-// REPEAT VARIABLES & MIXINS
-// -------------------------
-// Required since we compile the responsive stuff separately
-
-//@import "variables.less"; // Modify this for custom colors, font-sizes, etc
-//@import "mixins.less";
-
-
-// RESPONSIVE CLASSES
-// ------------------
-
-@import "responsive-utilities.less";
-
-
-// MEDIA QUERIES
-// ------------------
-
-// Large desktops
-//@import "responsive-1200px-min.less";
-
-// Tablets to regular desktops
-@import "responsive-768px-979px.less";
-
-// Phones to portrait tablets and narrow desktops
-@import "responsive-767px-max.less";
-
-
-// RESPONSIVE NAVBAR
-// ------------------
-
-// From 979px and below, show a button to toggle navbar contents
-//@import "responsive-navbar.less";
-
-
-
+@import "responsive.less";
 
 // Utility classes
 @import "utilities.less"; // Has to be last to override when necessary
-
-// Prism Sublime theme
-@import "../shCore.less";
-@import "../shCoreDefault.less";
-@import "../shThemeMidnight.less";
-// Fontelo custom build
-@import "../fontello.less";
-// errfield styles
-@import "../style.less";

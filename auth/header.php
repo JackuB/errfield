@@ -12,7 +12,7 @@
 <body>
     <div id="sidebar">
         <div id="logo">
-            <a href="#">
+            <a href="#home">
                 <img src="auth/img/errfield_logo.jpg">
             </a>
         </div>
