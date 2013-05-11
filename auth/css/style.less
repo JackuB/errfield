@@ -24,9 +24,15 @@ html, body {
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* Opera/IE 8+ */
-	outline:none;
+	outline:0!important;
 }
 
+
+h1, h2, h3 {
+	margin:0;
+	padding:0;
+	line-height: 1.4;
+}
 #wrapper{
 float: right;
 width: 100%;
@@ -93,10 +99,13 @@ margin-left: -640px; /*Set left margin to -(leftColumnWidth + RightColumnWidth)*
 	z-index:900;
 	left:320px;
 	overflow:auto;
+	border-left:1px solid #e2dede;
+	border-right:1px solid #e2dede;
 	h2 {
 		font-size: 28px;
 		color:black;
-		padding-top: 10px;
+		padding-top: 40px;
+		padding-bottom: 25px;
 	}
 	.projectSwitch {
 		padding:25px;
@@ -125,10 +134,15 @@ margin-left: -640px; /*Set left margin to -(leftColumnWidth + RightColumnWidth)*
 
 #content {
 	display:none;
-	padding:50px;
+	padding:45px;
 	margin-left: 640px;
 	position: relative;
 	z-index:800;
+	&.loading {
+		background-image:url('../img/loader.gif');
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
 	.event {
 		background:url('../img/eventDetailIco.png') center left no-repeat #404238;
 		-moz-box-shadow: inset 0 0 5px #333;
@@ -156,8 +170,8 @@ margin-left: -640px; /*Set left margin to -(leftColumnWidth + RightColumnWidth)*
 			white-space:nowrap;
 			display:block;
 			clear:both;
-			padding-top:8px;
-			padding-bottom: 7px;
+			padding-top:10px;
+			padding-bottom: 3px;
 		}
 		.description {
 			.fileInfo {

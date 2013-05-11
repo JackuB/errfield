@@ -1,13 +1,24 @@
 <?php
     require_once '../../config.php';
+
+    // get POST
+    $whatProjectID = $_POST['id'];
+
+    // what project is in POST?
+    $getProject = DB::query("SELECT id, name, url, table_name FROM projects WHERE id = %i", $whatProjectID);
+
+    // databases which should be used
+    $whatDBEvents = "prj_" . $getProject[0]["table_name"] . "_events";
+    $whatDBPerformance = "prj_" . $getProject[0]["table_name"] . "_performance";
 ?>
+
 <h1>Application performance report</h1>
 
 <div id="chartdiv" style="width: 100%; height: 400px;"></div>
 
 <script type='text/javascript'>
 var chartData = [<?php
-$chart = DB::query("SELECT time, redirectTime, requestTime, responseTime, domProcessingTime, domLoadingTime, loadEventTime, from_unixtime(time,'%Y-%m-%d') FROM performance WHERE from_unixtime(time,'%Y-%m-%d') BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND CURDATE() ORDER BY from_unixtime(time,'%Y-%m-%d') ASC;");
+$chart = DB::query("SELECT time, redirectTime, requestTime, responseTime, domProcessingTime, domLoadingTime, loadEventTime, from_unixtime(time,'%Y-%m-%d') FROM $whatDBPerformance WHERE from_unixtime(time,'%Y-%m-%d') BETWEEN DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND CURDATE() ORDER BY from_unixtime(time,'%Y-%m-%d') ASC;");
 
 $groups = array();
 foreach ($chart as $item) {

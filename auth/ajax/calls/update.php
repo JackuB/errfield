@@ -4,6 +4,16 @@
 
 <?php
 
+// get POST
+$whatProjectID = $_POST['id_project'];
+
+// what project is in POST?
+$getProject = DB::query("SELECT id, name, url, table_name FROM projects WHERE id = %i", $whatProjectID);
+
+// databases which should be used
+$whatDBEvents = "prj_" . $getProject[0]["table_name"] . "_events";
+$whatDBPerformance = "prj_" . $getProject[0]["table_name"] . "_performance";
+
 $whatID = $_POST['id'];
 
 $how = $_POST['method'];

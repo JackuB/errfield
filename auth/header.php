@@ -36,24 +36,6 @@
     </div>
 
     <div id="projectDetail">
-        <h2>Project name</h2>
-        <a class="projectSwitch error" href="javascript:;">
-            <span class="number">
-                16
-            </span><br />
-            <span class="text">
-                Unsolved errors
-            </span>
-        </a>
-
-        <a class="projectSwitch stats" href="javascript:;">
-            <span class="number">
-                1 836 ms
-            </span><br />
-            <span class="text">
-                Median load time
-            </span>
-        </a>
     </div>
 
     <div id="content">

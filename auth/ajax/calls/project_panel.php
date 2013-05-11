@@ -2,10 +2,10 @@
 	require_once '../../../config.php';
 
 	// get POST
-	$whatID = $_POST['id'];
+	$whatProjectID = $_POST['id'];
 
 	// what project is in POST?
-	$getProject = DB::query("SELECT id, name, url, table_name FROM projects WHERE id = %i", $whatID);
+	$getProject = DB::query("SELECT id, name, url, table_name FROM projects WHERE id = %i", $whatProjectID);
 
 	// databases which should be used
 	$whatDBEvents = "prj_" . $getProject[0]["table_name"] . "_events";
@@ -26,9 +26,9 @@
 	// sort array
 	sort($median);
 
-	if($whatID != '') { ?>
+	if($whatProjectID != '') { ?>
         <h2><?=$getProject[0]["name"]?></h2>
-        <a class="projectSwitch error" href="javascript:;">
+        <a class="projectSwitch error" href="#project/<?=$whatProjectID?>">
             <span class="number">
                 <?=count($unsolvedErrors);?>
             </span><br />
@@ -37,7 +37,7 @@
             </span>
         </a>
 
-        <a class="projectSwitch stats" href="javascript:;">
+        <a class="projectSwitch stats" href="#project/<?=$whatProjectID?>/performance">
             <span class="number">
                 <?=number_format($median[count($median)/2], 0, ',', ' ');?> ms
             </span><br />
