@@ -12,7 +12,7 @@
 	use phpbrowscap\Browscap;
 
 	// Create a new Browscap object (loads or creates the cache)
-	$bc = new Browscap('Browsecap/cache/');
+	$bc = new Browscap('libs/Browsecap/cache/');
 
 	// Get information about the current browser's user agent
 	$current_browser = $bc->getBrowser();
