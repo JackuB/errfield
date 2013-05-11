@@ -11,7 +11,7 @@ if(empty(DB::$dbName) and empty(DB::$user)) {
 	die();
 }
 
-require_once 'functions.php';
+require_once 'libs/functions.php';
 
 if (strpos($_SERVER['REQUEST_URI'],'gate.php') === false) {
     require_once 'loginForm/users.php';
