@@ -16,11 +16,12 @@
 	foreach ($results as $event) { ?>
 	<div class="event">
 	    <div class="description" data-attr="<?php echo $event['id'] ?>">
+	    	<a href="#project/<?=$whatProjectID?>/event/<?=$event['id']?>" class="detailClick"></a>
 	    	<span class="eventMeta pull-left">
 	            <?php echo _('occured '); if($event['count'] == 1) {echo _('once');} else {echo $event['count']; echo _(' times'); } ?> | <?php echo _('Last occurence'); ?>: <?php echo FormatTime($event['lastoccurence']) ?>
         	</span>
         	<span class="eventMeta pull-right">
-        		<a href="#project/<?=$whatProjectID?>/event/<?=$event['id']?>">Detail</a>&nbsp;&nbsp;&nbsp;<a data-project="<?=$whatProjectID?>" data-id="<?=$event['id']?>" href="javascript:;">Ignore</a>&nbsp;&nbsp;&nbsp;<a data-project="<?=$whatProjectID?>" data-id="<?=$event['id']?>" href="javascript:;">Solve</a>
+        		<a class="detailLink" href="#project/<?=$whatProjectID?>/event/<?=$event['id']?>">Detail</a>&nbsp;&nbsp;&nbsp;<a data-project="<?=$whatProjectID?>" data-id="<?=$event['id']?>" href="javascript:;">Ignore</a>&nbsp;&nbsp;&nbsp;<a data-project="<?=$whatProjectID?>" data-id="<?=$event['id']?>" href="javascript:;">Solve</a>
         	</span>
         	<span class="errorText">
 	        	<?php echo $event['text'] ?>

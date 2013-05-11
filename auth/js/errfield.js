@@ -76,3 +76,18 @@ $("#sidebar ul li").on("click","a",function(e) {
 	$("#sidebar ul li").find("a").removeClass("active");
 	$(this).addClass("active");
 });
+//.detailClick, .detailLink
+content.on("mouseenter",".detailClick",function() {
+    $(this).parent().parent().addClass("active");
+    console.log("in");
+});
+content.on("mouseleave",".detailClick",function() {
+    $(this).parent().parent().removeClass("active");
+});
+content.on("mouseenter",".detailLink",function() {
+    $(this).parent().parent().parent().addClass("active");
+    console.log("in");
+});
+content.on("mouseleave",".detailLink",function() {
+    $(this).parent().parent().parent().removeClass("active");
+});

@@ -15,7 +15,7 @@
 	$event = DB::query("SELECT *, COUNT(*) as count, MAX(time) AS lastoccurence FROM $whatDBEvents WHERE id=%i ORDER BY time DESC;",$eventID);
 ?>
 
-<div class="event">
+<div class="event detail">
     <div class="description" data-attr="<?php echo $event['id'] ?>">
     	<span class="eventMeta pull-left">
             <?php echo _('occured '); if($event[0]['count'] == 1) {echo _('once');} else {echo $event[0]['count']; echo _(' times'); } ?> | <?php echo _('Last occurence'); ?>: <?php echo FormatTime($event[0]['lastoccurence']) ?>

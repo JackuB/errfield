@@ -153,6 +153,28 @@ margin-left: -640px; /*Set left margin to -(leftColumnWidth + RightColumnWidth)*
 		font-family: @monoFontFamily;
 		font-size: 14px;
 		text-shadow: 0 1px 0 #000;
+		position: relative;
+		&.active {
+			background:url('../img/eventDetailIcoActive.png') center left no-repeat #404238;
+		}
+		&.detail {
+			background:#404238;
+			padding-left:15px;
+			.errorText {
+				overflow: visible;
+				text-overflow: none;
+				white-space:normal;
+			}
+		}
+		.detailClick {
+			position:absolute;
+			top:0;
+			left:0;
+			width:83px;
+			cursor:pointer;
+			height:100%;
+			display: block;
+		}
 		.eventMeta {
 			font-size: 12px;
 			color:#777871;
