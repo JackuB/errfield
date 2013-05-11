@@ -1,9 +1,9 @@
 <?php
 
-require_once 'db/meekrodb.2.1.class.php';
+require_once 'libs/meekro/meekrodb.2.1.class.php';
 
 DB::$user = 'root';
-DB::$password = 'root';
+DB::$password = '';
 DB::$dbName = 'errfield';
 
 if(empty(DB::$dbName) and empty(DB::$user)) {

@@ -6,7 +6,7 @@
 	require_once 'config.php';
 
 	// Loads the class
-	require 'Browsecap/Browscap.php';
+	require 'libs/Browsecap/Browscap.php';
 
 	// The Browscap class is in the phpbrowscap namespace, so import it
 	use phpbrowscap\Browscap;
