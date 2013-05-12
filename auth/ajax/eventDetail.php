@@ -30,6 +30,8 @@
     </div>
 </div>
 
+<h2>Occurences</h2>
+
 <?php
 	if($event[0]['line'] != 0) {
 		$line = $event[0]['line'];
