@@ -48,31 +48,27 @@
 	</div>
 </div>
 
-<?php var_dump($occurences); ?>
+<?php /*var_dump($occurences); */?>
 
 <h2>Occurences</h2>
 
 <?php
 	if($event[0]['line'] != 0) {
-		$line = $event[0]['line'];
-		$lines = file($event[0]['file']);
-		if(isset($lines[$line+5])) {
-			echo "<pre class=\"brush: js; highlight: [".$event[0]['line']."]; toolbar: false; html-script: true; first-line: ".($line-4)."\">";
-			echo htmlspecialchars($lines[$line-5]);
-			echo htmlspecialchars($lines[$line-4]);
-			echo htmlspecialchars($lines[$line-3]);
-			echo htmlspecialchars($lines[$line-2]);
-			echo htmlspecialchars($lines[$line-1]);
-			echo htmlspecialchars($lines[$line]);
-			echo htmlspecialchars($lines[$line+1]);
-			echo htmlspecialchars($lines[$line+2]);
-			echo htmlspecialchars($lines[$line+3]);
-			echo htmlspecialchars($lines[$line+4]);
-			echo htmlspecialchars($lines[$line+5]);
-			echo "</pre>";
-		} else {
-			echo "<h3 class=\"well\">File has changed or couldn't be fetched</h3>";
-		}
+		echo "<pre class=\"brush: js; highlight: [".$event[0]['line']."]; toolbar: false; html-script: true; first-line: ".($line-4)."\">";
+		/*echo htmlspecialchars($lines[$line-5]);
+		echo htmlspecialchars($lines[$line-4]);
+		echo htmlspecialchars($lines[$line-3]);
+		echo htmlspecialchars($lines[$line-2]);
+		echo htmlspecialchars($lines[$line-1]);
+		echo htmlspecialchars($lines[$line]);
+		echo htmlspecialchars($lines[$line+1]);
+		echo htmlspecialchars($lines[$line+2]);
+		echo htmlspecialchars($lines[$line+3]);
+		echo htmlspecialchars($lines[$line+4]);
+		echo htmlspecialchars($lines[$line+5]);*/
+		echo get_data($event[0]['file'],$event[0]['line']);
+		echo htmlspecialchars($lines[222]);
+		echo "</pre>";
 	} else {
 		echo "<h3 class=\"well\">Looks like error happened in external JS file or there was error with reported line and/or url.</h3>";
 	}
