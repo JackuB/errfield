@@ -56,6 +56,7 @@ function ajaxLoadState(projectId,error,eventDetail,event_id) {
         $.post(urlToCall, {id: projectId, eventId: event_id}, function(data) {
             content.removeClass("loading");
             content.html(data);
+            SyntaxHighlighter.all();
         });
     });
 }
