@@ -74,7 +74,7 @@ unset($date);
     // SERIAL CHART
     chart = new AmCharts.AmSerialChart();
 
-    chart.pathToImages = "http://www.amcharts.com/lib/images/";
+    chart.pathToImages = "http://errfield.com/auth/img/amcharts/";
     chart.zoomOutButton = {
         backgroundColor: '#000000',
         backgroundAlpha: 0.15

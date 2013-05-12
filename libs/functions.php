@@ -93,9 +93,12 @@ function get_data($url,$line) {
   curl_close($ch);
   $lines = array();
   $lines = explode("\n", $file_contents);
-  echo $lines[$line-1];
-  echo $lines[$line];
-  echo $lines[$line+1];
+
+  echo htmlspecialchars($lines[$line-2]); if(strlen($lines[$line-2]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
+  echo htmlspecialchars($lines[$line-1]); if(strlen($lines[$line-1]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
+  echo htmlspecialchars($lines[$line]); if(strlen($lines[$line]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
+  echo htmlspecialchars($lines[$line+1]); if(strlen($lines[$line+1]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
+  echo htmlspecialchars($lines[$line+2]); if(strlen($lines[$line+2]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
 }
 
 /*
