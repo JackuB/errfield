@@ -67,7 +67,6 @@
 		echo htmlspecialchars($lines[$line+4]);
 		echo htmlspecialchars($lines[$line+5]);*/
 		echo get_data($event[0]['file'],$event[0]['line']);
-		echo htmlspecialchars($lines[222]);
 		echo "</pre>";
 	} else {
 		echo "<h3 class=\"well\">Looks like error happened in external JS file or there was error with reported line and/or url.</h3>";
