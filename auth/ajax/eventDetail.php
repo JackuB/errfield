@@ -37,7 +37,17 @@
 	<div class="span4">
 		<h2>Occurences <small>last 7 days</small></h2>
 		<?php
-		$occurences = DB::query("SELECT * FROM $whatDBEvents WHERE text=%s AND from_unixtime(time) <= NOW() AND from_unixtime(time) >= DATE_SUB(from_unixtime(time), INTERVAL 7 DAY) ORDER BY time DESC;",$eventText[0]['text']);
+		$occurences = DB::query("SELECT text, time, from_unixtime(time,'%Y-%m-%d'), COUNT(*) as 'count' FROM $whatDBEvents WHERE text = %s GROUP BY DAY(from_unixtime(time)) ORDER BY time DESC LIMIT 7;",$eventText[0]['text']);
+		var_dump($occurences);
+		$timestamp = time();
+		for ($i = 0 ; $i < 7 ; $i++) {
+		    if(date('Y-m-d', $timestamp) == $occurences[$i]["from_unixtime(time,'%Y-%m-%d')"]) {
+		    	echo $occurences[$i]["count"] . "<br />";
+	    	} else {
+	    		echo "0";
+	    	}
+		    $timestamp -= 24 * 3600;
+		}
 		?>
 	</div>
 	<div class="span4">
