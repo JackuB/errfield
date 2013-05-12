@@ -5,6 +5,16 @@
 
 	require_once 'config.php';
 
+    // get POST
+    $whatProjectID = $_POST['id'];
+
+    // what project is in POST?
+    $getProject = DB::query("SELECT id, name, url, table_name FROM projects WHERE id = %i", $whatProjectID);
+
+    // databases which should be used
+    $whatDBEvents = "prj_" . $getProject[0]["table_name"] . "_events";
+    $whatDBPerformance = "prj_" . $getProject[0]["table_name"] . "_performance";
+
 	// Loads the class
 	require 'libs/Browsecap/Browscap.php';
 
@@ -24,7 +34,7 @@
 	$url=$_SERVER['HTTP_REFERER'];
 
 	if($_POST["type"] == "time") {
-		DB::insert('performance', array(
+		DB::insert('$whatDBPerformance', array(
 			'time' => time(),
 			'url' => htmlspecialchars($url),
 			'ip' => htmlspecialchars($ip),
@@ -42,13 +52,13 @@
 		));
 	} elseif($_POST["type"] != "") {
 		$text = htmlspecialchars($_POST["text"]);
-		$results = DB::query("SELECT * FROM events WHERE text='$text' AND state='ignored';");
+		$results = DB::query("SELECT * FROM $whatDBEvents WHERE text='$text' AND state='ignored';");
 		if(!empty($results)) {
 			$newState = "ignored";
 		} else {
 			$newState = "unresolved";
 		}
-		DB::insert('events', array(
+		DB::insert('$whatDBEvents', array(
 			'ip' => htmlspecialchars($ip),
 			'url' => htmlspecialchars($url),
 		  	'elapsedtime' => htmlspecialchars($_POST["elapsedtime"]),
