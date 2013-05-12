@@ -34,7 +34,7 @@
 	$url=$_SERVER['HTTP_REFERER'];
 
 	if($_POST["type"] == "time") {
-		DB::insert('$whatDBPerformance', array(
+		DB::insert($whatDBPerformance, array(
 			'time' => time(),
 			'url' => htmlspecialchars($url),
 			'ip' => htmlspecialchars($ip),
@@ -56,9 +56,9 @@
 		if(!empty($results)) {
 			$newState = "ignored";
 		} else {
-			$newState = "unresolved";
+			$newState = "unsolved";
 		}
-		DB::insert('$whatDBEvents', array(
+		DB::insert($whatDBEvents, array(
 			'ip' => htmlspecialchars($ip),
 			'url' => htmlspecialchars($url),
 		  	'elapsedtime' => htmlspecialchars($_POST["elapsedtime"]),

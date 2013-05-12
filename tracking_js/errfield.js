@@ -15,7 +15,7 @@
         window.onerror = function() {};
         var elapsed = new Date().getTime()-renderStart;
         var params = "type=0&id="+project_id+"&text="+msg+"&line="+line+"&file="+url+"&elapsedtime="+elapsed+userDetail;
-        xmlhttp.open("POST","/errfield/gate.php",true);
+        xmlhttp.open("POST","http://errfield.com/gate.php",true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send(params);
         return false;
@@ -45,7 +45,7 @@
                         loadEventTime = perfLoadEnd - perfLoadStart;
                     }
                     var params = "type=time&id="+project_id+"&redirectCount="+perfRedir+"&redirectTime="+redirectTime+"&requestTime="+requestTime+"&responseTime="+responseTime+"&domProcessingTime="+domProcessingTime+"&domLoadingTime="+domLoadingTime+"&loadEventTime="+loadEventTime+userDetail;
-                    secondxmlhttp.open("POST","/errfield/gate.php",true);
+                    secondxmlhttp.open("POST","http://errfield.com/gate.php",true);
                     secondxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     secondxmlhttp.send(params);
                 }
