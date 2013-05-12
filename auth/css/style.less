@@ -29,7 +29,7 @@ html, body {
 
 
 h1, h2, h3 {
-	margin:0;
+	margin:15px 0 0 0;
 	padding:0;
 	line-height: 1.4;
 }
@@ -204,5 +204,40 @@ margin-left: -640px; /*Set left margin to -(leftColumnWidth + RightColumnWidth)*
 				line-height: 1.1;
 			}
 		}
+	}
+}
+
+
+.affectedURLs {
+	ul {
+		margin:0;
+		padding:0;
+	}
+	li {
+		list-style-type:none;
+		padding-left:0;
+		margin-bottom:3px;
+		font-size:12px;
+		line-height:1.6;
+		padding:8px;
+		&:nth-child(2n) {
+			background:#eee;
+		}
+	}
+	span {
+		font-size:18px;
+		line-height:1.2;
+		margin-right:5px;
+		width:9%;
+		display:inline-block;
+	}
+	a {
+		position:relative;
+		top:2px;
+		display:inline-block;
+		width:85%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space:nowrap;
 	}
 }

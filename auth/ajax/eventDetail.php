@@ -76,7 +76,6 @@
 	    // Value
 	    var valueAxis = new AmCharts.ValueAxis();
 	    valueAxis.gridAlpha = 0.07;
-	    valueAxis.title = "Occurences per day";
 	    chart.addValueAxis(valueAxis);
 
 	    // GRAPH
@@ -97,15 +96,17 @@
 	    chart.invalidateSize();
 		</script>
 	</div>
-	<div class="span6">
+	<div class="span5 offset1">
 		<h2>Affected URLs</h2>
 		<div class="affectedURLs">
+			<ul>
 			<?php
-			$urls = DB::query("SELECT url, text, COUNT(*) as count FROM errfield.prj_jedenbod_events WHERE text = %s GROUP BY url ORDER BY count DESC LIMIT 15;",$eventText[0]['text']);
+			$urls = DB::query("SELECT url, text, COUNT(*) as count FROM errfield.prj_jedenbod_events WHERE text = %s GROUP BY url ORDER BY count DESC LIMIT 10;",$eventText[0]['text']);
 			foreach($urls as $url) {
-				echo "<span>" . $url["count"] . "</span>" . "<a href=\"" . $url["url"] . "\" target=\"_blank\">" . $url["url"] . "</a><br />";
+				echo "<li><span>" . $url["count"] . "</span>" . "<a href=\"" . $url["url"] . "\" target=\"_blank\">" . $url["url"] . "</a></li>";
 			}
 			?>
+			</ul>
 		</div>
 	</div>
 </div>
