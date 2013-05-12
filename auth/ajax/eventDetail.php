@@ -12,7 +12,7 @@
 	$whatDBPerformance = "prj_" . $getProject[0]["table_name"] . "_performance";
 
 	$eventID = $_POST['eventId'];
-	$event = DB::query("SELECT *, COUNT(*) as count, MAX(time) AS lastoccurence FROM $whatDBEvents WHERE id=%i ORDER BY time DESC;",$eventID);
+	$event = DB::query("SELECT *, COUNT(*) as count, MAX(time) AS lastoccurence FROM $whatDBEvents WHERE id=%i ORDER BY time ASC;",$eventID);
 ?>
 
 <div class="event detail">
@@ -30,7 +30,20 @@
     </div>
 </div>
 
-<h2>Occurences</h2>
+<div class="row-fluid">
+	<div class="span4">
+		<h2>Occurences</h2>
+	</div>
+	<div class="span4">
+		<h2>URLs</h2>
+	</div>
+	<div class="span4">
+		<h2>Browsers</h2>
+	</div>
+</div>
+
+
+<h2>Error detail</h2>
 
 <?php
 	if($event[0]['line'] != 0) {
