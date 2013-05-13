@@ -81,8 +81,14 @@
 	    // GRAPH
 	    graph = new AmCharts.AmGraph();
 	    //graph.type = "smoothedLine"; // this line makes the graph smoothed line.
+	    graph.lineThickness = 3;
 	    graph.lineColor = "#d1655d";
 	    graph.valueField = "value";
+	    graph.bullet = "round";
+	    graph.bulletColor = "#FFFFFF";
+	    graph.bulletBorderColor = "#d1655d";
+	    graph.bulletBorderThickness = 2;
+	    graph.bulletSize = 7;
 	    chart.addGraph(graph);
 
 	    // CURSOR
