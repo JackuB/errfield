@@ -90,3 +90,12 @@ content.on("mouseenter",".detailLink",function() {
 content.on("mouseleave",".detailLink",function() {
     $(this).parent().parent().parent().removeClass("active");
 });
+content.on("click",".updateLink",function() {
+    var self = $(this);
+    var project = $(this).attr("data-project");
+    var eventId = $(this).attr("data-id");
+    var method = $(this).attr("data-method");
+    $.post("auth/ajax/calls/update.php",{project_id:project,id:eventId,method:method},function(data) {
+        self.fadeOut(600);
+    });
+});

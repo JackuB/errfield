@@ -23,7 +23,7 @@
             <?php echo _('occured '); if(count($event) == 1) {echo _('once');} else {echo count($event); echo _(' times'); } ?> | <?php echo _('Last occurence'); ?>: <?php echo FormatTime($event[0]['time']) ?>
     	</span>
     	<span class="eventMeta pull-right">
-    		<a data-project="<?=$whatProjectID?>" data-id="<?=$event[0]['id']?>" href="javascript:;">Ignore</a>&nbsp;&nbsp;&nbsp;<a data-project="<?=$whatProjectID?>" data-id="<?=$event[0]['id']?>" href="javascript:;">Solve</a>
+    		<a class="updateLink" data-project="<?=$whatProjectID?>" data-id="<?=$event[0]['id']?>" data-method="ignore class="updateLink""  href="javascript:;">Ignore</a>&nbsp;&nbsp;&nbsp;<a class="updateLink" data-project="<?=$whatProjectID?>" data-id="<?=$event[0]['id']?>" data-method="solve" href="javascript:;">Solve</a>
     	</span>
     	<span class="errorText">
         	<?php echo $event[0]['text'] ?>
