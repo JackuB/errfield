@@ -96,6 +96,6 @@ content.on("click",".updateLink",function() {
     var eventId = $(this).attr("data-id");
     var method = $(this).attr("data-method");
     $.post("auth/ajax/calls/update.php",{project_id:project,id:eventId,method:method},function(data) {
-        self.fadeOut(600);
+        self.parent().parent().parent().fadeOut(600);
     });
 });
