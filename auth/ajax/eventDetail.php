@@ -40,7 +40,7 @@
 		<script>
 		var chartData = [
 		<?php
-			$occurences = DB::query("SELECT *, COUNT(*) as 'count' FROM $whatDBEvents WHERE text=%s GROUP BY DAY(from_unixtime(time)) ORDER BY time DESC LIMIT 8;",$eventText[0]['text']);
+			$occurences = DB::query("SELECT id, time, text, COUNT(*) as 'count' FROM $whatDBEvents WHERE text=%s GROUP BY DAY(from_unixtime(time)) ORDER BY time DESC LIMIT 8;",$eventText[0]['text']);
 			$timestamp = time() - (7*24*3600);
 			for ($i = 7 ; $i >= 0; $i--) {
 				echo "{date: \"" . date('m-d', $timestamp) . "\", value: ";
