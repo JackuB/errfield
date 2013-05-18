@@ -44,7 +44,7 @@
 		            </span><br />
 		            <span class="text">
 		                Median load time
-            	<?php } else { echo "No results for last 24 hours"; } ?>
+            	<?php } else { echo 'No results</span><br /><span class="text">for last 24 hours'; } ?>
             </span>
         </a>
 	<?php } else {
