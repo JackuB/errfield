@@ -8,12 +8,18 @@
     // get POST
     $whatProjectID = $_POST['id'];
 
+    $whatUserID = $_POST['user_id'];
+
+	$userIdent = DB::query("SELECT id, ident FROM users WHERE id=%s;",$whatUserID);
+	$userIdent = $userIdent[0]["ident"];
+	$projects_db = $userIdent[0]["ident"] . "_projects";
+
     // what project is in POST?
-    $getProject = DB::query("SELECT id, name, url, table_name FROM projects WHERE id = %i", $whatProjectID);
+    $getProject = DB::query("SELECT id, name, url, table_name FROM $projects_db WHERE id = %i", $whatProjectID);
 
     // databases which should be used
-    $whatDBEvents = "prj_" . $getProject[0]["table_name"] . "_events";
-    $whatDBPerformance = "prj_" . $getProject[0]["table_name"] . "_performance";
+    $whatDBEvents = $userIdent . "_" . $getProject[0]["table_name"] . "_events";
+    $whatDBPerformance = $userIdent . "_" . $getProject[0]["table_name"] . "_performance";
 
 	// Loads the class
 	require 'libs/Browsecap/Browscap.php';

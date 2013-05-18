@@ -5,11 +5,11 @@
 	$whatProjectID = $_POST['id'];
 
 	// what project is in POST?
-	$getProject = DB::query("SELECT id, name, url, table_name FROM projects WHERE id = %i", $whatProjectID);
+	$getProject = DB::query("SELECT id, name, url, table_name FROM $projects_db WHERE id = %i", $whatProjectID);
 
 	// databases which should be used
-	$whatDBEvents = "prj_" . $getProject[0]["table_name"] . "_events";
-	$whatDBPerformance = "prj_" . $getProject[0]["table_name"] . "_performance";
+	$whatDBEvents = $loggedUserIdent . "_" . $getProject[0]["table_name"] . "_events";
+	$whatDBPerformance = $loggedUserIdent . "_" . $getProject[0]["table_name"] . "_performance";
 
 	$eventID = $_POST['eventId'];
 	$eventText = DB::query("SELECT text FROM $whatDBEvents WHERE id=%i;",$eventID);
@@ -107,7 +107,7 @@
 		<div class="affectedURLs">
 			<ul>
 			<?php
-			$urls = DB::query("SELECT url, text, COUNT(*) as count FROM errfield.prj_jedenbod_events WHERE text = %s GROUP BY url ORDER BY count DESC LIMIT 10;",$eventText[0]['text']);
+			$urls = DB::query("SELECT url, text, COUNT(*) as count FROM $whatDBEvents WHERE text = %s GROUP BY url ORDER BY count DESC LIMIT 10;",$eventText[0]['text']);
 			foreach($urls as $url) {
 				echo "<li><span>" . $url["count"] . "</span>" . "<a href=\"" . $url["url"] . "\" target=\"_blank\">" . $url["url"] . "</a></li>";
 			}

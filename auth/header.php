@@ -1,7 +1,6 @@
 <?php
     require_once 'config.php';
-
-    $listProject = DB::query("SELECT id, name, url, table_name FROM projects");
+    $listProject = DB::query("SELECT id, name, url, table_name FROM $projects_db");
 ?>
 <!DOCTYPE html>
 <html class="no-js">

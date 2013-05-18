@@ -41,6 +41,10 @@ if(empty($userTest)) {
 		if($hashCheck[0]['passwordHash'] !== $_SESSION['errfieldHash']) {
 			session_destroy();
 			die('Unathorized access, reload this page and try to login again');
+		} else {
+			$loggedUserIdent = DB::query("SELECT id, ident FROM users WHERE id=%s;",$_SESSION['errfieldUserID']);
+			$loggedUserIdent = $loggedUserIdent[0]["ident"];
+			$projects_db = $loggedUserIdent . "_projects";
 		}
 	} else {
 		if(empty($_POST['password']) and empty($_POST['login'])) {

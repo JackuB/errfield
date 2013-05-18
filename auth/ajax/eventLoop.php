@@ -5,11 +5,11 @@
 	$whatProjectID = $_POST['id'];
 
 	// what project is in POST?
-	$getProject = DB::query("SELECT id, name, url, table_name FROM projects WHERE id = %i", $whatProjectID);
+	$getProject = DB::query("SELECT id, name, url, table_name FROM $projects_db WHERE id = %i", $whatProjectID);
 
 	// databases which should be used
-	$whatDBEvents = "prj_" . $getProject[0]["table_name"] . "_events";
-	$whatDBPerformance = "prj_" . $getProject[0]["table_name"] . "_performance";
+	$whatDBEvents = $loggedUserIdent . "_" . $getProject[0]["table_name"] . "_events";
+	$whatDBPerformance = $loggedUserIdent . "_" . $getProject[0]["table_name"] . "_performance";
 
 	$results = DB::query("SELECT id, type, state, time, text, file, line, COUNT(*) as count, MAX(time) AS lastoccurence FROM $whatDBEvents WHERE state='unsolved' GROUP BY text ORDER BY count DESC;");
 

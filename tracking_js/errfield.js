@@ -1,5 +1,6 @@
 (function () {
     var project_id = 0;
+    var user_id = 0;
     var renderStart = new Date().getTime();
     var xmlhttp=[];
     var secondxmlhttp=[];
@@ -14,7 +15,7 @@
     window.onerror = function (msg, url, line) {
         window.onerror = function() {};
         var elapsed = new Date().getTime()-renderStart;
-        var params = "type=0&id="+project_id+"&text="+msg+"&line="+line+"&file="+url+"&elapsedtime="+elapsed+userDetail;
+        var params = "type=0&id="+project_id+"&user_id="+user_id+"&text="+msg+"&line="+line+"&file="+url+"&elapsedtime="+elapsed+userDetail;
         xmlhttp.open("POST","http://errfield.com/gate.php",true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send(params);
@@ -44,7 +45,7 @@
                     if(perfLoadEnd > 0) {
                         loadEventTime = perfLoadEnd - perfLoadStart;
                     }
-                    var params = "type=time&id="+project_id+"&redirectCount="+perfRedir+"&redirectTime="+redirectTime+"&requestTime="+requestTime+"&responseTime="+responseTime+"&domProcessingTime="+domProcessingTime+"&domLoadingTime="+domLoadingTime+"&loadEventTime="+loadEventTime+userDetail;
+                    var params = "type=time&id="+project_id+"&user_id="+user_id+"&redirectCount="+perfRedir+"&redirectTime="+redirectTime+"&requestTime="+requestTime+"&responseTime="+responseTime+"&domProcessingTime="+domProcessingTime+"&domLoadingTime="+domLoadingTime+"&loadEventTime="+loadEventTime+userDetail;
                     secondxmlhttp.open("POST","http://errfield.com/gate.php",true);
                     secondxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     secondxmlhttp.send(params);
