@@ -19,6 +19,15 @@ Sammy(function() {
         ajaxLoadState(this.params['project_id'],false,false,'');
     });
 
+    this.get("settings",function() {
+        ajaxLoadSinglePage("auth/ajax/settings.php");
+    });
+
+    this.get("users",function() {
+        ajaxLoadSinglePage("auth/ajax/users.php");
+    });
+
+
     this.get("home",function() {
         showOnlyHomepage();
     });
@@ -61,6 +70,19 @@ function ajaxLoadState(projectId,error,eventDetail,event_id) {
     });
 }
 
+function ajaxLoadSinglePage(route) {
+    projectDetail.animate({"left":"0px","opacity":"0"});
+    content.show().animate({"left":"-320px","opacity":"1"});
+    $("#sidebar ul li").find("a").removeClass("active");
+    content.html('');
+    projectDetail.html();
+    content.addClass("loading");
+    content.load(route,function() {
+        content.removeClass("loading");
+        SyntaxHighlighter.highlight();
+    });
+}
+
 function showOnlyHomepage() {
 	projectDetail.animate({"left":"0px","opacity":"0"});
 	content.animate({"left":"-640px","opacity":"0"});
@@ -97,6 +119,6 @@ content.on("click",".updateLink",function() {
     var method = $(this).attr("data-method");
     $.post("auth/ajax/calls/update.php",{project_id:project,id:eventId,method:method},function(data) {
         self.parent().parent().parent().animate({"opacity":"0"},600).slideUp(450);
-        $("#projectDetail .error  .number").text(parseInt($("#projectDetail .number").text(),10) - 1);
+        $("#projectDetail .error .number").text(parseInt($("#projectDetail .number").text(),10) - 1);
     });
 });
