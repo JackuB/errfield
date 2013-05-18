@@ -22,6 +22,8 @@
                 <img src="auth/img/errfield_logo.jpg">
             </a>
         </div>
+        <a href="#settings" class="settingButton settings">Settings</a>
+        <a href="#users" class="settingButton users">Users</a>
         <ul>
             <?php foreach($listProject as $project) { ?>
                 <li>

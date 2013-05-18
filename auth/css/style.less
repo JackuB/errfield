@@ -58,6 +58,22 @@ margin-left: -640px; /*Set left margin to -(leftColumnWidth + RightColumnWidth)*
 			padding:25px 0;
 		}
 	}
+	.settingButton {
+		display:inline-block;
+		width:44%;
+		background:lighten(#090909,15%);
+		margin-left:3%;
+		padding:10px;
+		text-align:center;
+		color:white;
+		transition:all 0.3s;
+		font-weight: 900;
+		&:hover {
+			color:lighten(#090909,15%);
+			background:white;
+			text-decoration: none;
+		}
+	}
 	ul {
 		padding-left: 0;
 		margin-left:0;
@@ -72,7 +88,7 @@ margin-left: -640px; /*Set left margin to -(leftColumnWidth + RightColumnWidth)*
 				&:hover, &.active {
 					color:white;
 					text-decoration: none;
-					background: #2c2829;
+					background:lighten(#090909,15%);
 				}
 				.title {
 					font-size: 18px;
