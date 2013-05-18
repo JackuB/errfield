@@ -97,5 +97,6 @@ content.on("click",".updateLink",function() {
     var method = $(this).attr("data-method");
     $.post("auth/ajax/calls/update.php",{project_id:project,id:eventId,method:method},function(data) {
         self.parent().parent().parent().animate({"opacity":"0"},600).slideUp(450);
+        $("#projectDetail .error  .number").text(parseInt($("#projectDetail .number").text(),10) - 1);
     });
 });
