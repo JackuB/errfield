@@ -27,7 +27,7 @@
 		sort($median);
 	}
 	if($whatProjectID != '') { ?>
-        <h2><?=$getProject[0]["name"]?></h2>
+        <h2><?=$getProject[0]["name"]?> <a href="#project/<?=$whatProjectID?>/settings" class="projectLabel">Settings</a></h2>
         <a class="projectSwitch error" href="#project/<?=$whatProjectID?>">
             <span class="number">
                 <?=count($unsolvedErrors);?>

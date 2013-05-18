@@ -122,6 +122,22 @@ margin-left: -640px; /*Set left margin to -(leftColumnWidth + RightColumnWidth)*
 		color:black;
 		padding-top: 40px;
 		padding-bottom: 25px;
+		.projectLabel {
+			display:inline-block;
+			font-size:10px;
+			text-transform: uppercase;
+			padding:4px;
+			color:white;
+			background:lighten(#090909,15%);
+			line-height: 1;
+			position: relative;
+			top:-3px;
+			transition:background 0.2s;
+			&:hover {
+				background:lighten(#090909,35%);
+				text-decoration: none;
+			}
+		}
 	}
 	.projectSwitch {
 		padding:25px;
