@@ -12,7 +12,7 @@
 
 	$userIdent = DB::query("SELECT id, ident FROM users WHERE id=%s;",$whatUserID);
 	$userIdent = $userIdent[0]["ident"];
-	$projects_db = $userIdent[0]["ident"] . "_projects";
+	$projects_db = $userIdent . "_projects";
 
     // what project is in POST?
     $getProject = DB::query("SELECT id, name, url, table_name FROM $projects_db WHERE id = %i", $whatProjectID);
