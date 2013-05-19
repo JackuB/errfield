@@ -94,11 +94,11 @@ function get_data($url,$line) {
   $lines = array();
   $lines = explode("\n", $file_contents);
 
+  echo htmlspecialchars($lines[$line-4]); if(strlen($lines[$line-4]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
+  echo htmlspecialchars($lines[$line-3]); if(strlen($lines[$line-3]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
   echo htmlspecialchars($lines[$line-2]); if(strlen($lines[$line-2]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
   echo htmlspecialchars($lines[$line-1]); if(strlen($lines[$line-1]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
   echo htmlspecialchars($lines[$line]); if(strlen($lines[$line]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
-  echo htmlspecialchars($lines[$line+1]); if(strlen($lines[$line+1]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
-  echo htmlspecialchars($lines[$line+2]); if(strlen($lines[$line+2]) <= 1) {echo "&nbsp;&#8291;\n&nbsp;";};
 }
 
 /*
@@ -115,7 +115,7 @@ function get_data($url,$line) {
   // In a login form:
   $is_correct = Bcrypt::check($_POST['password'], $stored_hash_for_user);
 
-  // In a login form when migrating entries gradually from a legacy SHA-1 hash:
+  // In a login form when migrating entries gradually from a legacy SHA-3 hash:
   $is_correct = Bcrypt::check(
       $_POST['password'],
       $stored_hash_for_user,
