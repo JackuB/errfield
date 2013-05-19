@@ -120,7 +120,7 @@
 <h2>Code</h2>
 <?php
 	if($event[0]['line'] != 0) {
-		echo "<pre class=\"brush: js; highlight: [".$event[0]['line']."]; toolbar: false; html-script: true; first-line: ".($event[0]['line']-2)."\">";
+		echo "<pre class=\"brush: js; highlight: [".$event[0]['line']."]; toolbar: false; first-line: ".($event[0]['line']-2)."\">";
 		echo get_data($event[0]['file'],$event[0]['line']);
 		echo "</pre>";
 	} else {
