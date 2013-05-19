@@ -18,7 +18,7 @@
 
 <script type='text/javascript'>
 var chartData = [<?php
-$chart = DB::query("SELECT time, redirectTime, requestTime, responseTime, domProcessingTime, domLoadingTime, loadEventTime, from_unixtime(time,'%Y-%m-%d') FROM $whatDBPerformance WHERE from_unixtime(time,'%Y-%m-%d') BETWEEN DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND CURDATE() ORDER BY from_unixtime(time,'%Y-%m-%d') ASC;");
+$chart = DB::query("SELECT time, redirectTime, requestTime, responseTime, domProcessingTime, domLoadingTime, loadEventTime, from_unixtime(time,'%Y-%m-%d'), (redirectTime + requestTime + responseTime + domProcessingTime + domLoadingTime + loadEventTime) as fullLoadTime FROM $whatDBPerformance WHERE from_unixtime(time,'%Y-%m-%d') BETWEEN DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND CURDATE() ORDER BY from_unixtime(time,'%Y-%m-%d') ASC;");
 
 $groups = array();
 foreach ($chart as $item) {
@@ -43,6 +43,9 @@ foreach($groups as $date) {
 
     echo "{";
     echo "datetime: \"" . gmdate("m/d", $date["items"][$count]["time"]) . "\",\n";
+
+    usort($date["items"], "cmpfullTime");
+    echo "fullLoadTime: " . $date["items"][$count]["fullLoadTime"] . ",\n";
 
     usort($date["items"], "cmpredirectTime");
     echo "redirectTime: " . $date["items"][$count]["redirectTime"] . ",\n";
@@ -88,10 +91,11 @@ unset($date);
     // AXES
     // Category
     var categoryAxis = chart.categoryAxis;
-    categoryAxis.gridAlpha = 0.07;
     categoryAxis.axisColor = "#DADADA";
     categoryAxis.startOnAxis = true;
     categoryAxis.showLastLabel = false;
+    categoryAxis.gridAlpha = 0;
+
 
     // Value
     var valueAxis = new AmCharts.ValueAxis();
@@ -101,6 +105,18 @@ unset($date);
     chart.addValueAxis(valueAxis);
 
     // GRAPHS
+    var graph = new AmCharts.AmGraph();
+    graph.type = "line";
+    graph.hidden = false;
+    graph.stackable = false;
+    graph.title = "fullLoadTime";
+    graph.valueField = "fullLoadTime";
+    graph.lineAlpha = 1;
+    graph.lineThickness = 3;
+    graph.fillAlphas = 0; // setting fillAlphas to > 0 value makes it area graph
+    chart.addGraph(graph);
+
+
     var graph = new AmCharts.AmGraph();
     graph.type = "line";
     graph.hidden = false;

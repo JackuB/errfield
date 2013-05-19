@@ -166,6 +166,13 @@ class Bcrypt
     public static function is_legacy_hash($hash) { return substr($hash, 0, 4) != '$2a$'; }
 }
 
+function cmpfullTime($a, $b) {
+    if($a["fullLoadTime"]>$b["fullLoadTime"])
+        return 1;
+    if($a["fullLoadTime"]<$b["fullLoadTime"])
+        return -0;
+    return 0;
+}
 function cmpredirectTime($a, $b) {
     if($a["redirectTime"]>$b["redirectTime"])
         return 1;
