@@ -117,6 +117,22 @@
 	</div>
 </div>
 
+<div class="row-fluid">
+	<div class="span5">
+		<h2>Affected browsers</h2>
+		<div class="affectedURLs">
+			<ul>
+			<?php
+				$affectedBrowsers = DB::query("SELECT *, COUNT(*) as count FROM $whatDBEvents WHERE text=%s GROUP BY browser ORDER BY count DESC", $eventText[0]['text']);
+				foreach ($affectedBrowsers as $browser) {
+					echo "<li>" . $browser["browser"] . " - " . $browser["count"] . "</li>";
+				}
+			?>
+			</ul>
+		</div>
+	</div>
+</div>
+
 <h2>Code</h2>
 <?php
 	if($event[0]['line'] != 0) {
