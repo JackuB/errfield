@@ -7,24 +7,32 @@
 
 	if(isset($HTTP_RAW_POST_DATA)) {
 	  	parse_str($HTTP_RAW_POST_DATA); // gets some variables
-	  	//echo $user_id;
 	} else {
-
+		$id = $_POST['id'];
+		$user_id = $_POST['user_id'];
+		$type = $_POST["type"];
+		$resolution = $_POST["resolution"];
+		$redirectCount = $_POST["redirectCount"];
+		$redirectTime = $_POST["redirectTime"];
+		$requestTime = $_POST["requestTime"];
+		$responseTime = $_POST["responseTime"];
+		$domProcessingTime = $_POST["domProcessingTime"];
+		$domLoadingTime = $_POST["domLoadingTime"];
+		$loadEventTime = $_POST["loadEventTime"];
+		$elapsedtime = $_POST["elapsedtime"];
+		$resolution = $_POST["resolution"];
+		$type = $_POST["type"];
+		$line = $_POST["line"];
+		$file = $_POST["file"];
+		$text = $_POST["text"];
 	}
 
-
-
-    // get POST
-    $whatProjectID = $_POST['id'];
-
-    $whatUserID = $_POST['user_id'];
-
-	$userIdent = DB::query("SELECT id, ident FROM users WHERE id=%s;",$whatUserID);
+	$userIdent = DB::query("SELECT id, ident FROM users WHERE id=%s;",$user_id);
 	$userIdent = $userIdent[0]["ident"];
 	$projects_db = $userIdent . "_projects";
 
     // what project is in POST?
-    $getProject = DB::query("SELECT id, name, url, table_name FROM $projects_db WHERE id = %i", $whatProjectID);
+    $getProject = DB::query("SELECT id, name, url, table_name FROM $projects_db WHERE id = %i", $id);
 
     // databases which should be used
     $whatDBEvents = $userIdent . "_" . $getProject[0]["table_name"] . "_events";
@@ -48,25 +56,25 @@
 	// Get referring URL
 	$url=$_SERVER['HTTP_REFERER'];
 
-	if($_POST["type"] == "time") {
+	if($type == "time") {
 		DB::insert($whatDBPerformance, array(
 			'time' => time(),
 			'url' => htmlspecialchars($url),
 			'ip' => htmlspecialchars($ip),
-			'resolution' => htmlspecialchars($_POST["resolution"]),
+			'resolution' => htmlspecialchars($resolution),
 			'browser' => htmlspecialchars($current_browser->Browser),
 			'browserVersion' => htmlspecialchars($current_browser->Version),
 			'OS' => htmlspecialchars($current_browser->Platform),
-		  	'redirectCount' => htmlspecialchars($_POST["redirectCount"]),
-		  	'redirectTime' => htmlspecialchars($_POST["redirectTime"]),
-		  	'requestTime' => htmlspecialchars($_POST["requestTime"]),
-		  	'responseTime' => htmlspecialchars($_POST["responseTime"]),
-		  	'domProcessingTime' => htmlspecialchars($_POST["domProcessingTime"]),
-		  	'domLoadingTime' => htmlspecialchars($_POST["domLoadingTime"]),
-		  	'loadEventTime' => htmlspecialchars($_POST["loadEventTime"])
+		  	'redirectCount' => htmlspecialchars($redirectCount),
+		  	'redirectTime' => htmlspecialchars($redirectTime),
+		  	'requestTime' => htmlspecialchars($requestTime),
+		  	'responseTime' => htmlspecialchars($responseTime),
+		  	'domProcessingTime' => htmlspecialchars($domProcessingTime),
+		  	'domLoadingTime' => htmlspecialchars($domLoadingTime),
+		  	'loadEventTime' => htmlspecialchars($loadEventTime)
 		));
-	} elseif($_POST["type"] != "") {
-		$text = htmlspecialchars($_POST["text"]);
+	} elseif($type != "") {
+		$text = htmlspecialchars($text);
 		$results = DB::query("SELECT * FROM $whatDBEvents WHERE text='$text' AND state='ignored';");
 		if(!empty($results)) {
 			$newState = "ignored";
@@ -76,17 +84,17 @@
 		DB::insert($whatDBEvents, array(
 			'ip' => htmlspecialchars($ip),
 			'url' => htmlspecialchars($url),
-		  	'elapsedtime' => htmlspecialchars($_POST["elapsedtime"]),
-			'resolution' => htmlspecialchars($_POST["resolution"]),
+		  	'elapsedtime' => htmlspecialchars($elapsedtime),
+			'resolution' => htmlspecialchars($resolution),
 			'browser' => htmlspecialchars($current_browser->Browser),
 			'browserVersion' => htmlspecialchars($current_browser->Version),
 			'OS' => htmlspecialchars($current_browser->Platform),
-			'type' => htmlspecialchars($_POST["type"]),
+			'type' => htmlspecialchars($type),
 			'state' => $newState,
 			'time' => time(),
 			'text' => $text,
-			'line' => htmlspecialchars($_POST["line"]),
-			'file' => htmlspecialchars($_POST["file"])
+			'line' => htmlspecialchars($line),
+			'file' => htmlspecialchars($file)
 		));
 	} else {
 		die('Nothing was POSTed');
