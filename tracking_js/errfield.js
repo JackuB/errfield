@@ -1,24 +1,30 @@
 (function () {
+    function createCORSRequest(method, url) {
+        var xhr = new XMLHttpRequest();
+        if ("withCredentials" in xhr) {
+            xhr.open(method, url, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("Connection", "close");
+        } else if (typeof XDomainRequest != "undefined") {
+            xhr = new XDomainRequest();
+            xhr.open(method, url);
+        } else {
+            xhr = null;
+        }
+        return xhr;
+    }
     var project_id = 0;
     var user_id = 0;
     var renderStart = new Date().getTime();
-    var xmlhttp=[];
-    var secondxmlhttp=[];
-    if (window.XMLHttpRequest) {
-        xmlhttp=new XMLHttpRequest();
-        secondxmlhttp=new XMLHttpRequest();
-    } else {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        secondxmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
     var userDetail = "&resolution="+screen.width+'x'+screen.height;
     window.onerror = function (msg, url, line) {
         window.onerror = function() {};
         var elapsed = new Date().getTime()-renderStart;
         var params = "type=0&id="+project_id+"&user_id="+user_id+"&text="+msg+"&line="+line+"&file="+url+"&elapsedtime="+elapsed+userDetail;
-        xmlhttp.open("POST","http://errfield.com/gate.php",true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send(params);
+        var onErrorRequest = createCORSRequest("post", "http://errfield.com/gate.php");
+        if (onErrorRequest) {
+            onErrorRequest.send(params);
+        }
         return false;
     };
     window.onload=function() {
@@ -46,11 +52,12 @@
                         loadEventTime = perfLoadEnd - perfLoadStart;
                     }
                     var params = "type=time&id="+project_id+"&user_id="+user_id+"&redirectCount="+perfRedir+"&redirectTime="+redirectTime+"&requestTime="+requestTime+"&responseTime="+responseTime+"&domProcessingTime="+domProcessingTime+"&domLoadingTime="+domLoadingTime+"&loadEventTime="+loadEventTime+userDetail;
-                    secondxmlhttp.open("POST","http://errfield.com/gate.php",true);
-                    secondxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    secondxmlhttp.send(params);
+                    var performanceRequest = createCORSRequest("post", "http://errfield.com/gate.php");
+                    if (performanceRequest) {
+                        performanceRequest.send(params);
+                    }
                 }
-            }, 20);
+            }, 350);
         }
     };
 }());

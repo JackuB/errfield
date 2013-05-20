@@ -5,6 +5,15 @@
 
 	require_once 'config.php';
 
+	if(isset($HTTP_RAW_POST_DATA)) {
+	  	parse_str($HTTP_RAW_POST_DATA); // gets some variables
+	  	//echo $user_id;
+	} else {
+
+	}
+
+
+
     // get POST
     $whatProjectID = $_POST['id'];
 
