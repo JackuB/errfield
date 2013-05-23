@@ -3,22 +3,22 @@
 
 	$allUsers = DB::query("SELECT ident FROM users");
 
-	$allProjects = [];
+	$allProjects = array();
 
 	foreach($allUsers as $user) {
 		$ident = $user["ident"];
 		$projectsDb = $ident . "_projects";
-		$projectURL = DB::query("SELECT * FROM $projectsDb");
-		$projectURL = $projectURL["url"];
-		array_push($allProjects, $projectURL);
+		$projects = DB::query("SELECT * FROM $projectsDb");
+		foreach($projects as $project) {
+			$projectURL = $project["url"];
+			array_push($allProjects, $projectURL);
+		}
 	}
 
 	foreach($allProjects as $project) {
 		$curl = curl_init(); // Initialize libcurl
-		// set options:
 		curl_setopt ($curl, CURLOPT_URL, $project ); // URL to visit
 		curl_setopt ($curl, CURLOPT_RETURNTRANSFER, TRUE); // returns a string instead of echoing to screen
-		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE); // follows redirects (recursive)
 		curl_setopt($curl, CURLOPT_NOBODY, TRUE); // Only get headers, not content (saves on time)
 		$result = curl_exec($curl);
 		$errno = curl_errno($curl);
