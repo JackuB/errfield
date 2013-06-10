@@ -8,11 +8,11 @@
 $whatProjectID = $_POST['project_id'];
 
 // what project is in POST?
-$getProject = DB::query("SELECT id, name, url, table_name FROM $projects_db WHERE id = %i", $whatProjectID);
+$getProject = DB::query("SELECT id, name, url, table_name FROM $currUser->projects_db WHERE id = %i", $whatProjectID);
 
 // databases which should be used
-$whatDBEvents = $loggedUserIdent . "_" . $getProject[0]["table_name"] . "_events";
-$whatDBPerformance = $loggedUserIdent . "_" . $getProject[0]["table_name"] . "_performance";
+$whatDBEvents = $currUser->ident . "_" . $getProject[0]["table_name"] . "_events";
+$whatDBPerformance = $currUser->ident . "_" . $getProject[0]["table_name"] . "_performance";
 
 $whatID = $_POST['id'];
 

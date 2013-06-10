@@ -5,11 +5,11 @@
 	$whatProjectID = $_POST['id'];
 
 	// what project is in POST?
-	$getProject = DB::query("SELECT id, name, url, table_name FROM $projects_db WHERE id = %i", $whatProjectID);
+	$getProject = DB::query("SELECT id, name, url, table_name FROM $currUser->projects_db WHERE id = %i", $whatProjectID);
 
 	// databases which should be used
-	$whatDBEvents = $loggedUserIdent . "_" . $getProject[0]["table_name"] . "_events";
-	$whatDBPerformance = $loggedUserIdent . "_" . $getProject[0]["table_name"] . "_performance";
+	$whatDBEvents = $currUser->ident . "_" . $getProject[0]["table_name"] . "_events";
+	$whatDBPerformance = $currUser->ident . "_" . $getProject[0]["table_name"] . "_performance";
 
 	$eventID = $_POST['eventId'];
 	$eventText = DB::query("SELECT text FROM $whatDBEvents WHERE id=%i;",$eventID);
@@ -44,11 +44,11 @@
 			$timestamp = time() - (7*24*3600);
 			for ($i = 7 ; $i >= 0; $i--) {
 				echo "{date: \"" . date('m-d', $timestamp) . "\", value: ";
-			    if(date('Y-m-d', $timestamp) == date('Y-m-d', $occurences[$i]["time"])) {
-			    	echo $occurences[$i]["count"];
-		    	} else {
-		    		echo "0";
-		    	}
+	    		if(!empty($occurences[$i]["count"])) {
+	    			echo $occurences[$i]["count"];
+	    		} else {
+	    			echo "0";
+	    		}
 			    $timestamp += 24 * 3600;
 			    if($i != 0) {echo "},";} else {echo "}";}
 			}
@@ -117,6 +117,7 @@
 	</div>
 </div>
 
+
 <div class="row-fluid">
 	<div class="span5">
 		<h2>Affected browsers</h2>
@@ -132,6 +133,7 @@
 		</div>
 	</div>
 </div>
+
 
 <h2>Code</h2>
 <?php

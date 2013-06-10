@@ -31,6 +31,9 @@ Sammy(function() {
         ajaxLoadSinglePage("auth/ajax/users.php");
     });
 
+    this.get("newProject",function() {
+        ajaxLoadSinglePage("auth/ajax/newProject.php");
+    });
 
     this.get("home",function() {
         showOnlyHomepage();
