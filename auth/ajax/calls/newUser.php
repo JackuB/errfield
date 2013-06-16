@@ -1,7 +1,7 @@
 <?
 	require_once '../../../config.php';
 
-	if(!empty($_POST["login"]) and !empty($_POST["password"]) and !empty($_POST["email"])) {
+	if(!empty($_POST["login"]) and !empty($_POST["password"]) and !empty($_POST["email"]) and $currUser->id == "0") {
 		if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
 
 

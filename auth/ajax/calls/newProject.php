@@ -1,7 +1,7 @@
 <?
 	require_once '../../../config.php';
 
-	if(!empty($_POST["name"]) and !empty($_POST["url"])) {
+	if(!empty($_POST["name"]) and !empty($_POST["url"]) and $currUser->id == "0") {
 		if (filter_var($_POST["url"], FILTER_VALIDATE_URL)) {
 			function generateRandomIdent() {
 				$ident = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 5)), 0, 5);
