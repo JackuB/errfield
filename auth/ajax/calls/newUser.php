@@ -49,18 +49,18 @@
 
 			$htmlEmail = file_get_contents("../../../emails/default-header.html");
 			$htmlEmail .= '
-			    <p align="left" class="article-title"><singleline label="Title">Hey there!</singleline></p>
+			    <h1>Hey there!</h1>
 			    <div align="left" class="article-content">
-			        <multiline label="Description">You just created new account on <a href="http://errfield.com/">Errfield.com</a>.</multiline>
+			        <p>You just created new account on <a href="http://errfield.com/">Errfield.com</a>.</p>
 			    </div>
 			    <div align="left" class="article-content">
-			        <multiline label="Description">Your login name is: <strong>' . $_POST["login"] . '</strong></multiline>
+			        <p>Your login name is: <strong>' . $_POST["login"] . '</strong></p>
 			    </div>
 			    <div align="left" class="article-content">
-			        <multiline label="Description">Your password is: <strong>' . $_POST["password"] . '</strong></multiline>
+			        <p>Your password is: <strong>' . $_POST["password"] . '</strong></p>
 			    </div>
 			    <div align="left" class="article-content">
-			        <multiline label="Description"><a href="http://errfield.com/">Login now!</a></multiline>
+			        <p><a href="http://errfield.com/">Login now!</a></p>
 			    </div>
 			    ';
 			$htmlEmail .= file_get_contents("../../../emails/default-footer.html");
