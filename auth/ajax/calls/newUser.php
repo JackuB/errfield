@@ -3,6 +3,19 @@
 
 	if(!empty($_POST["login"]) and !empty($_POST["password"]) and !empty($_POST["email"])) {
 		if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+
+
+			$userEmailExist = DB::query("SELECT * FROM users WHERE email = %s",$_POST["email"]);
+			$userLoginExist = DB::query("SELECT * FROM users WHERE username = %s",$_POST["login"]);
+
+			if(!empty($userEmailExist)) {
+				die("Email address already registered.");
+			}
+			if(!empty($userLoginExist)) {
+				die("Username already exists.");
+			}
+
+
 			function generateRandomIdent() {
 				$ident = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 5)), 0, 5);
 
@@ -32,6 +45,34 @@
 			  `table_name` varchar(45) CHARACTER DEFAULT NULL,
 			  PRIMARY KEY (`id`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;");
+
+
+			$htmlEmail = file_get_contents("emails/default-header.html");
+			$htmlEmail .= '
+			    <p align="left" class="article-title"><singleline label="Title">Hey there!</singleline></p>
+			    <div align="left" class="article-content">
+			        <multiline label="Description">You just created new account on <a href="http://errfield.com/">Errfield.com</a>.</multiline>
+			    </div>
+			    <div align="left" class="article-content">
+			        <multiline label="Description">Your login name is: ' . $_POST["login"] . '</multiline>
+			    </div>
+			    <div align="left" class="article-content">
+			        <multiline label="Description">Your password is: ' . $_POST["password"] . '</multiline>
+			    </div>
+			    <div align="left" class="article-content">
+			        <multiline label="Description"><a href="http://errfield.com/">Login now!</a></multiline>
+			    </div>
+			    ';
+			$htmlEmail .= file_get_contents("emails/default-footer.html");
+			$postmark = new Postmark($postmarkAPIkey,$postmarkFromEmail,$postmarkFromEmail);
+
+			$result = $postmark->to("<" . $_POST["login"] . "> " . $_POST["email"])
+				->subject("Welcome to Errfield.com")
+				->html_message($htmlEmail)
+				->send();
+
+			if($result === false)
+				die("Something went wrong with sending email. Check your Postmark account.");
 
 			header('Location: ' . $_SERVER['HTTP_REFERER'] . '#users');
 		} else {
