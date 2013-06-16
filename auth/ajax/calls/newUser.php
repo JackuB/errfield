@@ -40,14 +40,14 @@
 
 			DB::query("CREATE TABLE IF NOT EXISTS `" . $randomIdent . "_projects` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT,
-			  `name` varchar(100) CHARACTER DEFAULT NULL,
-			  `url` varchar(150) CHARACTER DEFAULT NULL,
-			  `table_name` varchar(45) CHARACTER DEFAULT NULL,
+			  `name` varchar(100) DEFAULT NULL,
+			  `url` varchar(150) DEFAULT NULL,
+			  `table_name` varchar(45) DEFAULT NULL,
 			  PRIMARY KEY (`id`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;");
 
 
-			$htmlEmail = file_get_contents("emails/default-header.html");
+			$htmlEmail = file_get_contents("../../../emails/default-header.html");
 			$htmlEmail .= '
 			    <p align="left" class="article-title"><singleline label="Title">Hey there!</singleline></p>
 			    <div align="left" class="article-content">
@@ -63,10 +63,10 @@
 			        <multiline label="Description"><a href="http://errfield.com/">Login now!</a></multiline>
 			    </div>
 			    ';
-			$htmlEmail .= file_get_contents("emails/default-footer.html");
+			$htmlEmail .= file_get_contents("../../../emails/default-footer.html");
 			$postmark = new Postmark($postmarkAPIkey,$postmarkFromEmail,$postmarkFromEmail);
 
-			$result = $postmark->to("<" . $_POST["login"] . "> " . $_POST["email"])
+			$result = $postmark->to($_POST["login"] . " <" . $_POST["email"] . ">")
 				->subject("Welcome to Errfield.com")
 				->html_message($htmlEmail)
 				->send();
