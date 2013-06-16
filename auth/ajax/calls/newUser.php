@@ -54,10 +54,10 @@
 			        <multiline label="Description">You just created new account on <a href="http://errfield.com/">Errfield.com</a>.</multiline>
 			    </div>
 			    <div align="left" class="article-content">
-			        <multiline label="Description">Your login name is: ' . $_POST["login"] . '</multiline>
+			        <multiline label="Description">Your login name is: <strong>' . $_POST["login"] . '</strong></multiline>
 			    </div>
 			    <div align="left" class="article-content">
-			        <multiline label="Description">Your password is: ' . $_POST["password"] . '</multiline>
+			        <multiline label="Description">Your password is: <strong>' . $_POST["password"] . '</strong></multiline>
 			    </div>
 			    <div align="left" class="article-content">
 			        <multiline label="Description"><a href="http://errfield.com/">Login now!</a></multiline>
