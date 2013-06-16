@@ -27,6 +27,7 @@ $currUser = (object) array(
 	'projects' => DB::query("SELECT id, name, url, table_name FROM " . $loggedUserIdent[0]["ident"] . "_projects" )
 );
 
+require("libs/postmark.php");
 $postmarkAPIkey = "";
 $postmarkFromEmail = "";
 
