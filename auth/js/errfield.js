@@ -125,3 +125,6 @@ content.on("click",".updateLink",function() {
         $("#projectDetail .error .number").text(parseInt($("#projectDetail .number").text(),10) - 1);
     });
 });
+$(document).on("click",".selectAll",function() {
+    $(this).select();
+})
