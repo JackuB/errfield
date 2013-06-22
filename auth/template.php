@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>errfield - web error reporting and performance analysis</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=1280" />
+    <meta name="viewport" content="width=1440" />
     <link rel="stylesheet" href="auth/css/style.css">
     <script type="text/javascript" src="auth/js/head.load.min.js"></script>
 </head>
